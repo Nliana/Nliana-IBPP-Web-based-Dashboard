@@ -2,14 +2,14 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dashboard Design</title>
         <link rel="stylesheet" href="style.css" />
         <!-- Font Awesome Cdn Link-->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
     </head>
+
     <body>
         <div class="sidebar">
             <div class="logo"></div>
@@ -64,13 +64,17 @@
             </ul>
         </div>
 
-        <div class="main--content">
+        <div class="main--content" id="mainReport">
             <div class="header--wrapper">
                 <div class="header--title">
                     <span>Primary</span>
                     <h2>Dashboard</h2>
                 </div>
                 <div class="user--info">
+
+                   <!-- <input type="button" value="Download PDF" onclick="printReport()"> --><!-- Button to download page as pdf-->
+                    <button>Download Report</button>
+                    
                     <div class="search--box">
                     <i class="fa-solid fa-search"></i>
                     <input type="text" placeholder="Search" />
@@ -87,58 +91,37 @@
                         <div class="card--header">
                             <div class="amount">
                                 <span class="title">
-                                    Payment amount
-                                </span>
-                                <span class="amount--value">
-                                    $500.00
+                                    Network Throughput
                                 </span>
                             </div>
-                            <i class="fas fa-dollar-sign icon"></i>
                         </div>
-                        <span class="card-detail">
-                            **** **** **** 3484
-                        </span>
                     </div>
 
                     <div class="payment--card light-purple">
                         <div class="card--header">
                             <div class="amount">
                                 <span class="title">
-                                    Payment order
-                                </span>
-                                <span class="amount--value">
-                                    $200.00
+                                    Issues Detected by Type
                                 </span>
                             </div>
-                            <i class="fas fa-list icon dark-purple"></i>
                         </div>
-                        <span class="card-detail">
-                            **** **** **** 5542
-                        </span>
                     </div>
 
                     <div class="payment--card light-green">
                         <div class="card--header">
                             <div class="amount">
                                 <span class="title">
-                                    Payment customer
-                                </span>
-                                <span class="amount--value">
-                                    $350.00
+                                    Most Countries Detected (Stealth Communication)
                                 </span>
                             </div>
-                            <i class="fas fa-users icon dark-green"></i>
                         </div>
-                        <span class="card-detail">
-                            **** **** **** 1000
-                        </span>
                     </div>
-
+<!--
                     <div class="payment--card light-blue">
                         <div class="card--header">
                             <div class="amount">
                                 <span class="title">
-                                    Payment proceed
+                                    
                                 </span>
                                 <span class="amount--value">
                                     $150.00
@@ -152,61 +135,65 @@
                     </div>
                 </div>
             </div>
-
+-->
             <div class="tabular--wrapper">
-                <h3 class="main--title">Finance data</h3>
+                <h3 class="main--title">The network traffic detected</h3>
                 <div class="table-container">
                     <table>
                         <thead>
                             <tr>
                                 <th>Date</th>
-                                <th>Transaction Type</th>
-                                <th>Description</th>
-                                <th>Amount</th>
-                                <th>Category</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>Source IP Address</th>
+                                <th>Destination IP Address</th>
+                                <th>Source Port</th>
+                                <th>Destination Port</th>
+                                <th>Protocol Field</th>
+                                <th>Domain Name</th>
+                                <th>Country</th>
                             </tr>
                             <tbody>
                                 <tr>
                                     <td>
                                         2023-05-01
                                     </td>
-                                    <td>Expenses</td>
-                                    <td>Office Supplies</td>
-                                    <td>$250</td>
-                                    <td>Office Expenses</td>
-                                    <td>Pending</td>
-                                    <td><button>Edit</button></td>
+                                    <td>192.168.1.2</td>
+                                    <td>192.168.10.55</td>
+                                    <td>33790</td>
+                                    <td>80</td>
+                                    <td>null</td>
+                                    <td>example.com</td>
+                                    <td>Indonesia</td>
                                 </tr>
 
                                 <tr>
                                     <td>
                                         2023-05-01
                                     </td>
-                                    <td>Expenses</td>
-                                    <td>Client Payment</td>
-                                    <td>$500</td>
-                                    <td>Sales</td>
-                                    <td>Completed</td>
-                                    <td><button>Edit</button></td>
+                                    <td>192.168.9.2</td>
+                                    <td>192.168.10.55</td>
+                                    <td>33792</td>
+                                    <td>80</td>
+                                    <td>null</td>
+                                    <td>example.com</td>
+                                    <td>Malaysia</td>
                                 </tr>
 
                                 <tr>
                                     <td>
                                         2023-05-01
                                     </td>
-                                    <td>Expenses</td>
-                                    <td>Travel Supplies</td>
-                                    <td>$250</td>
-                                    <td>Travel</td>
-                                    <td>Pending</td>
-                                    <td><button>Edit</button></td>
+                                    <td>192.168.7.2</td>
+                                    <td>192.168.10.55</td>
+                                    <td>33793</td>
+                                    <td>80</td>
+                                    <td>null</td>
+                                    <td>example.com</td>
+                                    <td>China</td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="7">Total: $1,000</td>
+                                    <td colspan="8"></td>
                                 </tr>
                             </tfoot>
                         </thead>
@@ -214,5 +201,6 @@
                 </div>
             </div>
         </div>
+
     </body>
 </html>
