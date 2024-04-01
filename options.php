@@ -1,8 +1,16 @@
+<?php
+    session_start();
+    if (!isset($_SESSION["users"])){
+        header("Location: login.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <title>Dashboard Design</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css" />
         <!-- Font Awesome Cdn Link-->
         <link
@@ -15,19 +23,19 @@
             <div class="logo"></div>
             <ul class="menu">
                 <li class="active">
-                    <a href="options.html">
+                    <a href="options.php">
                         <i class="fas fa-shield"></i>
                         <span>IoT Benchmarking and Pentesting Platform</span>
                     </a>
                 </li>
                 <li>
-                    <a href="index.html">
+                    <a href="index.php">
                         <i class="fas fa-home"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="benchmark.html">
+                    <a href="benchmark.php">
                         <i class="fas fa-signal"></i>
                         <span>Benchmark
                             Network
@@ -35,14 +43,14 @@
                     </a>
                 </li>
                 <li>
-                    <a href="penetration.html">
+                    <a href="penetration.php">
                         <i class="fas fa-flask-vial"></i>
                         <span>Penetration
                             Testing</span>
                     </a>
                 </li>
                 <li>
-                    <a href="monitor.html">
+                    <a href="monitor.php">
                         <i class="fas fa-eye"></i>
                         <span>Monitor 
                             Network
@@ -50,13 +58,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="faq.html">
+                    <a href="faq.php">
                         <i class="fas fa-question-circle"></i>
                         <span>FAQ</span>
                     </a>
                 </li>
                 <li class="settings">
-                    <a href="settings.html">
+                    <a href="settings.php">
                         <i class="fas fa-cog"></i>
                         <span>Settings</span>
                     </a>
@@ -70,6 +78,7 @@
                     <h2>IoT Benchmarking and Pentesting Platform</h2>
                 </div>
                 <div class="user--info">
+                    <a href="logout.php" class="btn btn-warning">Logout</a>
                     <div class="search--box">
                     <i class="fa-solid fa-search"></i>
                     <input type="text" placeholder="Search" />

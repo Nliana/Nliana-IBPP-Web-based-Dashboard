@@ -377,3 +377,15 @@ tfoot td {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
+
+  .registration--container{
+    max-width: 600px;
+    margin:0 auto;
+    padding: 150px;
+    margin-top: 50px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+
+  .form--group {
+    margin-bottom: 30px;
+  }
