@@ -1,8 +1,4 @@
 <?php
-    include_once 'Nliana-IBPP-Web-based-Dashboard/database.php';
-?>
-
-<?php
     session_start();
     if (!isset($_SESSION["users"])){
         header("Location: login.php");

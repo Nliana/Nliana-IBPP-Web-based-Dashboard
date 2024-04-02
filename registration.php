@@ -22,12 +22,13 @@
             $email = $_POST["email"];
             $password = $_POST["password"];
             $password_repeat = $_POST["repeat_password"];
+            $user_type = $_POST["user--type"];
 
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
             $errors = array();
 
-            if (empty($full_name) OR empty($email) OR empty($password) OR empty($password_repeat)){
+            if (empty($full_name) OR empty($email) OR empty($password) OR empty($password_repeat) OR empty($user_type)){
                 array_push($errors, "All fields are required");
             }
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
@@ -51,11 +52,11 @@
             if (count($errors) == 0){
                 //data will be submitted into the database
                 
-                $sql = "INSERT INTO user (full_name, email, password) VALUES ( ?, ?, ? )"; //placeholder to avoid sql injection
+                $sql = "INSERT INTO user (full_name, email, password, user_type) VALUES ( ?, ?, ?, ? )"; //placeholder to avoid sql injection
                 $stmt = mysqli_stmt_init($db2);
                 $prep_stmt = mysqli_stmt_prepare($stmt, $sql);
                 if ($prep_stmt){
-                    mysqli_stmt_bind_param($stmt, "sss", $full_name, $email, $password_hash);
+                    mysqli_stmt_bind_param($stmt, "ssss", $full_name, $email, $password_hash, $user_type);
                     mysqli_stmt_execute($stmt);
                     echo "<div class='alert alert-success'>Registration successful</div>";
                 } else {
@@ -70,6 +71,7 @@
         ?>
 
         <form action="registration.php" method="post">
+            <h3>register now</h3>
             <div class="form--group">
                 <input type="text" class="form-control" name="fullname" placeholder="Full Name:">
             </div>
@@ -82,6 +84,10 @@
             <div class="form--group">
                 <input type="password" class="form-control" name="repeat_password" placeholder="Repeat Password:">
             </div>
+            <select name="user--type">
+                <option value="user">user</option>
+                <option value="admin">admin</option>
+            </select>
             <div class="form--group">
                 <input type="submit" class="btn btn-primary" value="Register" name="submit">
             </div>

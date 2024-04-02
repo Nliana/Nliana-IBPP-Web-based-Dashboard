@@ -27,10 +27,19 @@
             $users = mysqli_fetch_array($result, MYSQLI_ASSOC); //fetch the result as an associative array
             if ($users) { //Check whether email exists or match
                 if (password_verify($password, $users["password"])) {
-                    session_start();
-                    $_SESSION["users"] = "yes";
-                    header("Location: options.php");
-                    die();
+                    if ($users["user_type"] == "admin") {
+                        session_start();
+                        $_SESSION["admin_name"] = $users["full_name"];
+                        $_SESSION["users"] = "yes";
+                        header("Location: welcome_admin.php");
+                        die();
+                    } elseif ($users["user_type"] == "user"){
+                        session_start();
+                        $_SESSION["user_name"] = $users["full_name"];
+                        $_SESSION["users"] = "yes";
+                        header("Location: welcome_user.php");
+                        die();
+                    }
                 } else {
                     echo "<div class='alert alert-danger'>Password is incorrect</div>";
                 }
@@ -43,6 +52,7 @@
         ?>
 
         <form action="login.php" method="post">
+            <h3>Login Now</h3>
             <div class="form--group">
                 <input type="email" placeholder="Enter your email:" name="email" class="form-control">
             </div>

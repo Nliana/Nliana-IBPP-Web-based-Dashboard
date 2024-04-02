@@ -24,7 +24,7 @@ body {
     color: #fff;
     overflow: hidden;
     transition: all 0.5s linear;
-    background: rgba(113, 99, 186, 255);
+    background: #4691B0;
 }
 .sidebar:hover{
     width: 270px;
@@ -389,3 +389,80 @@ tfoot td {
   .form--group {
     margin-bottom: 30px;
   }
+
+  .admin--container{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    padding-bottom: 60px;
+    padding-left: 600px;
+  }
+
+  .admin--container .admin--content{
+    text-align: center;
+  }
+
+
+  .admin--container .admin--content h3{
+    font-size: 30px;
+    color: #333;
+  }
+
+  .admin--container .admin--content h3 span{
+    background: #4691B0;
+    color: #fff;
+    border-radius: 5px;
+    padding: 0 15px; 
+  }
+
+  .admin--container .admin--content h1{
+    font-size: 50px;
+    color: #333;
+}
+
+.admin--container .admin--content h1 span{
+    color: #4691B0;
+  }
+
+.admin--container .admin--content p{
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.admin--container .admin--content .btn{
+    display: inline-block;
+    padding: 10px 30px;
+    font-size: 20px;
+    background: #333;
+    color: #fff;
+    margin:0 5px;
+    text-transform: capitalize;
+  }
+
+  .admin--container .admin--content .btn:hover{
+    background: #4691B0;
+  }
+
+  .registration--container form h3{
+    font-size: 30px;
+    color: #333;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    text-transform: uppercase;
+  }
+
+  .registration--container form input,
+  .registration--container form select{
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 17px;
+    margin: 8px 0;
+    background: #75adc5;
+    border-radius: 5px;
+  }
+
+ .registration--container form select option {
+    background: #fff;
+ }
