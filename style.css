@@ -311,6 +311,12 @@ tfoot td {
     cursor: pointer;
 }
 
+/* .user--info button {
+    color: green;
+    background: none;
+    cursor: pointer;
+} */
+
 .check--container {
     display: block;
     position: relative;

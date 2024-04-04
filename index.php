@@ -14,7 +14,9 @@
         <link rel="stylesheet" href="style.css" />
         <!-- Font Awesome Cdn Link-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-
+        <!-- <script src=
+    "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js">
+        </script> -->
     </head>
 
     <body>
@@ -71,7 +73,7 @@
             </ul>
         </div>
 
-        <div class="main--content" id="mainReport">
+        <div class="main--content" >
             <div class="header--wrapper">
                 <div class="header--title">
                     <span>Primary</span>
@@ -79,8 +81,8 @@
                 </div>
                 <div class="user--info">
 
-                   <!-- <input type="button" value="Download PDF" onclick="printReport()"> --><!-- Button to download page as pdf-->
-                    <button>Download Report</button>
+                    <input type="button" value="Download PDF" onclick="printDiv()"> <!--Button to download page as pdf-->
+                    <!-- <button id="btn">Download Report</button> -->
                     
                     <div class="search--box">
                     <i class="fa-solid fa-search"></i>
@@ -91,7 +93,7 @@
             </div>
         
         
-            <div class="card--container">
+            <div class="card--container" id="mainReport">
                 <h3 class="main--title">Today's data</h3>
                 <div class="card--wrapper">
                     <div class="payment--card light-red">
@@ -208,6 +210,23 @@
                 </div>
             </div>
         </div>
+
+        <script> 
+            function printDiv() { 
+                var divContents = document.getElementById("mainReport").innerHTML; 
+                var originalContents = document.body.innerHTML;
+                //var originalContents = document.body.innerHTML; // Save original body content
+
+                // Replace body content with divContents
+                document.body.innerHTML = '<html><head><title>Print</title></head><body>' + divContents + '</body></html>';
+
+                // Print the page
+                window.print();
+
+                // Restore original body content
+                document.body.innerHTML = originalContents;
+            } 
+        </script>
 
     </body>
 </html>
