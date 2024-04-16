@@ -1,7 +1,8 @@
 <?php
+    @include "database_2.php";
     session_start();
-    if (isset($_SESSION["users"])){
-        header("Location: options.php");
+    if (!isset($_SESSION["admin_name"])){
+        header("Location: login.php");
     }
 ?>
 
@@ -24,7 +25,7 @@
             $password_repeat = $_POST["repeat_password"];
             $user_type = $_POST["user--type"];
 
-            $password_hash = password_hash($password, PASSWORD_DEFAULT);
+            $password_hash = password_hash($password, PASSWORD_DEFAULT); //neeed know the hash algorithm
 
             $errors = array();
 
@@ -73,18 +74,22 @@
         <form action="registration.php" method="post">
             <h3>register now</h3>
             <div class="form--group">
+                <label>Your Full Name</label>
                 <input type="text" class="form-control" name="fullname" placeholder="Full Name:">
             </div>
             <div class="form--group">
+                <label>Email</label>
                 <input type="email" class="form-control" name="email" placeholder="Email:">
             </div>
             <div class="form--group">
+                <label>Password</label>
                 <input type="password" class="form-control" name="password" placeholder="Password:">
             </div>
             <div class="form--group">
+                <label>Confirm Password</label>
                 <input type="password" class="form-control" name="repeat_password" placeholder="Repeat Password:">
             </div>
-            <select name="user--type">
+            <select name="user--type"> <!-- remove this user type -->
                 <option value="user">user</option>
                 <option value="admin">admin</option>
             </select>
