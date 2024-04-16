@@ -19,13 +19,13 @@
     <div class="registration--container">
         <?php
         if (isset($_POST["submit"])){
-            $full_name = $_POST["fullname"];
-            $email = $_POST["email"];
-            $password = $_POST["password"];
-            $password_repeat = $_POST["repeat_password"];
-            $user_type = $_POST["user--type"];
+            $full_name = mysqli_real_escape_string($db2, $_POST["fullname"]); //to prevent sql injection
+            $email = mysqli_real_escape_string($db2,$_POST["email"]);
+            $password = mysqli_real_escape_string($db2,$_POST["password"]);
+            $password_repeat = mysqli_real_escape_string($db2,$_POST["repeat_password"]);
+            $user_type = mysqli_real_escape_string($db2,$_POST["user--type"]);
 
-            $password_hash = password_hash($password, PASSWORD_DEFAULT); //neeed know the hash algorithm
+            $password_hash = password_hash($password, PASSWORD_DEFAULT); //need know the hash algorithm
 
             $errors = array();
 
