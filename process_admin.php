@@ -1,6 +1,6 @@
 <?php
 include "database_2.php";
-if (isset($_POST["submit"])){
+if (isset($_POST["create"])){
     $full_name = mysqli_real_escape_string($db2, $_POST["fullname"]); //to prevent sql injection
     $email = mysqli_real_escape_string($db2,$_POST["email"]);
     $password = mysqli_real_escape_string($db2,$_POST["password"]);
@@ -41,7 +41,9 @@ if (isset($_POST["submit"])){
         if ($prep_stmt){
             mysqli_stmt_bind_param($stmt, "ssss", $full_name, $email, $password_hash, $user_type);
             mysqli_stmt_execute($stmt);
-            echo "<div class='alert alert-success'>Update successful</div>";
+            session_start();
+            $_SESSION["create"] = "User Created Successfully";
+            header("Location: list_user.php");
         } else {
             die("Sorry, Something went wrong. Please try again later or contact the admin");
         }
@@ -50,6 +52,43 @@ if (isset($_POST["submit"])){
             echo "<div class='alert alert-danger'>$error</div>";
         }
     }
+}
+
+if (isset($_POST["edit"])){
+    $full_name = mysqli_real_escape_string($db2, $_POST["fullname"]); //to prevent sql injection
+    $email = mysqli_real_escape_string($db2,$_POST["email"]);
+    $password = mysqli_real_escape_string($db2,$_POST["password"]);
+    $password_repeat = mysqli_real_escape_string($db2,$_POST["repeat_password"]);
+    $user_type = mysqli_real_escape_string($db2,$_POST["user--type"]);
+    $user_id = mysqli_real_escape_string($db2,$_POST["user_id"]);
+
+    $password_hash = password_hash($password, PASSWORD_DEFAULT); //need know the hash algorithm
+
+    $errors = array();
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        array_push($errors, "Email format is invalid");
+    }
+    if (strlen($password) < 8){
+        array_push($errors, "Password must be at least 8 characters long");
+    }
+    if ($password != $password_repeat){
+        array_push($errors, "Passwords do not match");
+    }
+
+    $sql = "UPDATE user SET full_name = ?, email = ?, password = ?, user_type = ? WHERE user_id = $user_id"; 
+    $stmt = mysqli_stmt_init($db2);
+    $prep_stmt = mysqli_stmt_prepare($stmt, $sql);
+    if ($prep_stmt){
+        mysqli_stmt_bind_param($stmt, "ssss", $full_name, $email, $password_hash, $user_type);
+        mysqli_stmt_execute($stmt);
+        session_start();
+        $_SESSION["edit"] = "User Updated Successfully";
+        header("Location: list_user.php");
+    } else {
+        die("Sorry, Something went wrong. Please try again later or contact the admin");
+    }
+    
 }
 
 ?>

@@ -10,15 +10,54 @@
     <div class="container">
         <header class="d-flex justify-content-between my-4">
             <h1>User and Admin List</h1>
-            <a href="test.php" class="btn btn-primary">Add New User</a>
+            <a href="test_admin.php" class="btn btn-primary">Add New User</a>
         </header>
+        <?php
+        session_start();
+        if (isset($_SESSION["create"])){
+            ?>
+            <div class="alert alert-success">
+            <?php
+            echo $_SESSION["create"];
+            unset($_SESSION["create"]);
+            ?>
+            </div>
+            <?php
+        }
+        ?>
+
+        <?php
+        if (isset($_SESSION["edit"])){
+            ?>
+            <div class="alert alert-success">
+            <?php
+            echo $_SESSION["edit"];
+            unset($_SESSION["edit"]);
+            ?>
+            </div>
+            <?php
+        }
+        ?>
+
+        <?php
+        if (isset($_SESSION["delete"])){
+            ?>
+            <div class="alert alert-success">
+            <?php
+            echo $_SESSION["delete"];
+            unset($_SESSION["delete"]);
+            ?>
+            </div>
+            <?php
+        }
+        ?>
+
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Full Name</th>
                     <th>Email</th>
-                    <th>Password</th>
                     <th>Privilege Type</th>
                     <th>Action</th>
                 </tr>
@@ -29,7 +68,21 @@
                 $sql = "SELECT * FROM user";
                 $result = mysqli_query($db2, $sql);
                 $row = mysqli_fetch_array($result);
-                print_r($row);
+                while ($row = mysqli_fetch_array($result)) {
+                ?>
+                    <tr>
+                        <td><?php echo $row["user_id"]; ?></td>
+                        <td><?php echo $row["full_name"]; ?></td>
+                        <td><?php echo $row["email"]; ?></td>
+                        <td><?php echo $row["user_type"]; ?></td>
+                        <td>
+                            <a href="view_admin.php?user_id=<?php echo $row["user_id"]; ?>" class="btn btn-info">More Detail</a>
+                            <a href="edit_admin.php?user_id=<?php echo $row["user_id"]; ?>" class="btn btn-warning">Edit</a>
+                            <a href="delete_admin.php?user_id=<?php echo $row["user_id"]; ?>" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                <?php
+                }
                 ?>
             </tbody>
         </table>
