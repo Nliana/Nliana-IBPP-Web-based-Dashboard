@@ -91,62 +91,36 @@
             <div class="card--container">
                 <div class="main--title">
                     <h2>Welcome</h2>
-                    <h4>Please choose one or more testings to be done or go to the dashboard to view past tests</h4>
+                    <h4>You can conduct tests or go to the dashboard to view past tests</h4>
                 </div>
-                <div class="card--wrapper">
+                <div class="card--wrapper">   
+                <a href="device.php">
                     <div class="payment--card light-red">
                         <div class="card--header">
                             <div class="amount">
                                 <span class="title">
-                                    Benchmark Network Throughput
+                                    IoT Device Testing
                                 </span>
                                 <span class="amount--value">
                                     <i class="fas fa-signal"></i>   
                                 </span>   
-                            </div>  
-                            <label class="check--container"> <!--checkbox-->
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </label>  
+                            </div> 
                         </div>
                 </div>
-
-                <div class="payment--card light-purple">
+            
+                <div class="payment--card light-blue">
+                <a href="past_test.php">
                     <div class="card--header">
                         <div class="amount">
                             <span class="title">
-                                Penetration Testing
+                                    Past Tests
                             </span>
                             <span class="amount--value">
-                                <i class="fas fa-flask-vial"></i>
+                                <i class="fas fa-sheet-plastic"></i>   
                             </span>
-                        </div>
-                        <label class="check--container"> <!--checkbox-->
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label> 
+                        </div> 
                     </div>      
                 </div>
-
-                <div class="payment--card light-green">
-                    <div class="card--header">
-                        <div class="amount">
-                            <span class="title">
-                                Monitor Network Traffic
-                            </span>
-                            <span class="amount--value">
-                                <i class="fas fa-eye"></i>
-                            </span>
-                        </div>
-                        <label class="check--container"> <!--checkbox-->
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label> 
-                    </div>      
-                </div>
-
-                <a href="test_chosen.php" class="btn btn-warning">Run Test</a>
-
                 </div>
             </div>
         </div>

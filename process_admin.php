@@ -54,7 +54,7 @@ if (isset($_POST["create"])){
     }
 }
 
-if (isset($_POST["edit"])){
+if (isset($_POST["edit"])){ ////////DOUBLE CHECK FOR THIS PART!!
     $full_name = mysqli_real_escape_string($db2, $_POST["fullname"]); //to prevent sql injection
     $email = mysqli_real_escape_string($db2,$_POST["email"]);
     $password = mysqli_real_escape_string($db2,$_POST["password"]);
