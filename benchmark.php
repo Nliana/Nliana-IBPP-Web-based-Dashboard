@@ -9,13 +9,15 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>Dashboard Design</title>
+        <title>Benchmark Network Throughput</title>
         <link rel="stylesheet" href="style.css" />
         <!-- Font Awesome Cdn Link-->
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         />
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+        
     </head>
     <body>
         <div class="sidebar">
@@ -87,15 +89,86 @@
         
         
             <div class="card--container">
-                <h3 class="main--title">Today's data</h3>
+                <h3 class="main--title">The packet received</h3>
                 <div class="card--wrapper">
-                    
+                <canvas id="iperfChart" width="800" height="400"></canvas>
+
+                    <script>
+                        // Sample data, replace this with your actual iperf3 data
+                        const iperfData = {
+                            labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+                            values: [100, 150, 200, 180, 220] // Example values
+                        };
+
+                        // Get canvas element
+                        const ctx = document.getElementById('iperfChart').getContext('2d');
+
+                        // Create chart
+                        const iperfChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: iperfData.labels,
+                                datasets: [{
+                                    label: 'Data Received (Mbps)',
+                                    data: iperfData.values,
+                                    borderColor: 'blue',
+                                    backgroundColor: 'rgba(0, 0, 255, 0.2)', // Optional
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
                 </div>
             </div>
 
             <div class="tabular--wrapper">
-                <h3 class="main--title">Finance data</h3>
+                <h3 class="main--title">The packet send</h3>
                 <div class="table-container">
+                <canvas id="iperfChart" width="800" height="400"></canvas>
+
+                    <script>
+                        // Sample data, replace this with your actual iperf3 data
+                        const iperfData = {
+                            labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+                            values: [100, 150, 200, 180, 220] // Example values
+                        };
+
+                        // Get canvas element
+                        const ctx = document.getElementById('iperfChart').getContext('2d');
+
+                        // Create chart
+                        const iperfChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: iperfData.labels,
+                                datasets: [{
+                                    label: 'Data Send (Mbps)',
+                                    data: iperfData.values,
+                                    borderColor: 'blue',
+                                    backgroundColor: 'rgba(0, 0, 255, 0.2)', // Optional
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
                 </div>
             </div>
         </div>
