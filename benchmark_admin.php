@@ -1,8 +1,11 @@
 <?php
+
+    @include "database_2.php";
     session_start();
-    if (!isset($_SESSION["users"])){
+    if (!isset($_SESSION["admin_name"])){
         header("Location: login.php");
     }
+
 
     
 	/* Database connection settings */
@@ -56,19 +59,19 @@
             <div class="logo"></div>
             <ul class="menu">
                 <li class>
-                    <a href="options.php">
+                    <a href="options_admin.php">
                         <i class="fas fa-shield"></i>
                         <span>IoT Benchmarking and Pentesting Platform</span>
                     </a>
                 </li>
                 <li>
-                    <a href="index.php">
+                    <a href="index_admin.php">
                         <i class="fas fa-home"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="benchmark.php">
+                    <a href="benchmark_admin.php">
                         <i class="fas fa-signal"></i>
                         <span>Benchmark
                             Network
@@ -76,14 +79,14 @@
                     </a>
                 </li>
                 <li>
-                    <a href="penetration.php">
+                    <a href="penetration_admin.php">
                         <i class="fas fa-flask-vial"></i>
                         <span>Penetration
                             Testing</span>
                     </a>
                 </li>
                 <li>
-                    <a href="monitor.php">
+                    <a href="monitor_admin.php">
                         <i class="fas fa-eye"></i>
                         <span>Monitor 
                             Network
@@ -91,13 +94,19 @@
                     </a>
                 </li>
                 <li>
-                    <a href="past_test.php">
+                    <a href="past_test_admin.php">
                         <i class="fas fa-book"></i>
                         <span>Past Tests</span>
                     </a>
                 </li>
+                <li>
+                    <a href="list_user.php">
+                        <i class="fas fa-users"></i>
+                        <span>User Management</span>
+                    </a>
+                </li>
                 <li class="settings">
-                    <a href="faq.php">
+                    <a href="faq_admin.php">
                         <i class="fas fa-question-circle"></i>
                         <span>FAQ</span>
                     </a>
