@@ -58,15 +58,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="faq.php">
-                        <i class="fas fa-question-circle"></i>
-                        <span>FAQ</span>
+                    <a href="past_test.php">
+                        <i class="fas fa-book"></i>
+                        <span>Past Tests</span>
                     </a>
                 </li>
                 <li class="settings">
-                    <a href="settings.php">
-                        <i class="fas fa-cog"></i>
-                        <span>Settings</span>
+                    <a href="faq.php">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
                     </a>
                 </li>
             </ul>

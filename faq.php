@@ -10,6 +10,7 @@
     <head>
         <meta charset="UTF-8" />
         <title>Dashboard Design</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css" />
         <!-- Font Awesome Cdn Link-->
         <link
@@ -56,16 +57,16 @@
                             Traffic</span>
                     </a>
                 </li>
-                <li class="active">
-                    <a href="faq.php">
-                        <i class="fas fa-question-circle"></i>
-                        <span>FAQ</span>
+                <li>
+                    <a href="past_test.php">
+                        <i class="fas fa-book"></i>
+                        <span>Past Tests</span>
                     </a>
                 </li>
                 <li class="settings">
-                    <a href="settings.php">
-                        <i class="fas fa-cog"></i>
-                        <span>Settings</span>
+                    <a href="faq.php">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
                     </a>
                 </li>
             </ul>

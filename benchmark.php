@@ -3,6 +3,36 @@
     if (!isset($_SESSION["users"])){
         header("Location: login.php");
     }
+
+    
+	/* Database connection settings */
+	include_once 'iperf_data.php';
+
+	$data1 = '';
+	$data2 = '';
+    $data3 = '';
+    $data4 = '';
+	$timestamp = '';
+
+	$query = "SELECT iperf_results.timestamp, iperf_results.bandwidth, iperf_results.packet_loss, iperf_results.packets_sent, iperf_results.packets_received FROM iperf_results ORDER BY iperf_results.timestamp ASC";
+	
+    $runQuery = mysqli_query($conn, $query);
+
+	while ($row = mysqli_fetch_array($runQuery)) {
+
+		$data1 = $data1 . '"'. $row['bandwidth'].'",';
+		$data2 = $data2 . '"'. $row['packet_loss'] .'",';
+        $data3 = $data3 . '"'. $row['packets_sent'] .'",';
+        $data4 = $data4 . '"'. $row['packets_received'] .'",';
+		$timestamp = $timestamp . '"'. ucwords($row['timestamp']) .'",';
+	}
+
+	$data1 = trim($data1,",");
+	$data2 = trim($data2,",");
+    $data3 = trim($data3,",");
+    $data4 = trim($data4,",");
+	$timestamp = trim($timestamp,",");
+
 ?>
 
 <!DOCTYPE html>
@@ -10,6 +40,7 @@
     <head>
         <meta charset="UTF-8" />
         <title>Benchmark Network Throughput</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css" />
         <!-- Font Awesome Cdn Link-->
         <link
@@ -17,6 +48,7 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         />
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
         
     </head>
     <body>
@@ -59,15 +91,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="faq.php">
-                        <i class="fas fa-question-circle"></i>
-                        <span>FAQ</span>
+                    <a href="past_test.php">
+                        <i class="fas fa-book"></i>
+                        <span>Past Tests</span>
                     </a>
                 </li>
                 <li class="settings">
-                    <a href="settings.php">
-                        <i class="fas fa-cog"></i>
-                        <span>Settings</span>
+                    <a href="faq.php">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
                     </a>
                 </li>
             </ul>
@@ -79,6 +111,7 @@
                     <h2>Benchmark Network Throughput</h2>
                 </div>
                 <div class="user--info">
+                    <a href="logout.php" class="btn btn-warning">Logout</a>
                     <div class="search--box">
                     <i class="fa-solid fa-search"></i>
                     <input type="text" placeholder="Search" />
@@ -89,43 +122,39 @@
         
         
             <div class="card--container">
-                <h3 class="main--title">The packet received</h3>
+                <h3 class="main--title">The Bandwidth</h3>
                 <div class="card--wrapper">
-                <canvas id="iperfChart" width="800" height="400"></canvas>
+                <canvas id="iperfChart_1" style="width: 100%; height: 65vh; background: #222; border: 1px solid #555652; margin-top: 10px;"></canvas>
 
                     <script>
-                        // Sample data, replace this with your actual iperf3 data
-                        const iperfData = {
-                            labels: ["Jan", "Feb", "Mar", "Apr", "May"],
-                            values: [100, 150, 200, 180, 220] // Example values
-                        };
 
                         // Get canvas element
-                        const ctx = document.getElementById('iperfChart').getContext('2d');
+                        var ctx1 = document.getElementById('iperfChart_1').getContext('2d');
 
                         // Create chart
-                        const iperfChart = new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                labels: iperfData.labels,
-                                datasets: [{
-                                    label: 'Data Received (Mbps)',
-                                    data: iperfData.values,
-                                    borderColor: 'blue',
-                                    backgroundColor: 'rgba(0, 0, 255, 0.2)', // Optional
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    yAxes: [{
-                                        ticks: {
-                                            beginAtZero: true
-                                        }
-                                    }]
+                           
+                        var myChart = new Chart(ctx1, {
+                                type: 'line',
+                                data: {
+                                    labels: [<?php echo $timestamp; ?>],
+                                    datasets: 
+                                    [{
+                                        label: 'Bandwidth (Mbps)',
+                                        data: [<?php echo $data1; ?>],
+                                        backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                                        borderColor:'rgba(255,99,132,1)',
+                                        borderWidth: 3
+                                    }
+
+                                    ]
+                                },
+                            
+                                options: {
+                                    scales: {scales:{yAxes: [{beginAtZero: true}], xAxes: [{autoskip: true, maxTicketsLimit: 20}]}},
+                                    tooltips:{mode: 'index'},
+                                    legend:{display: true, position: 'top', labels: {fontColor: 'rgb(255,255,255)', fontSize: 16}}
                                 }
-                            }
-                        });
+                            });
                     </script>
                 </div>
             </div>
@@ -133,44 +162,111 @@
             <div class="tabular--wrapper">
                 <h3 class="main--title">The packet send</h3>
                 <div class="table-container">
-                <canvas id="iperfChart" width="800" height="400"></canvas>
+                        <canvas id="chart" style="width: 100%; height: 65vh; background: #222; border: 1px solid #555652; margin-top: 10px;"></canvas>
 
-                    <script>
-                        // Sample data, replace this with your actual iperf3 data
-                        const iperfData = {
-                            labels: ["Jan", "Feb", "Mar", "Apr", "May"],
-                            values: [100, 150, 200, 180, 220] // Example values
-                        };
+                            <script>
+                                var ctx2 = document.getElementById("chart").getContext('2d');
+                                var myChart = new Chart(ctx2, {
+                                type: 'line',
+                                data: {
+                                    labels: [<?php echo $timestamp; ?>],
+                                    datasets: 
+                                    [{
+                                        label: 'Bandwidth (Mbps)',
+                                        data: [<?php echo $data1; ?>],
+                                        backgroundColor: 'transparent',
+                                        borderColor:'rgba(255,99,132,1)',
+                                        borderWidth: 3
+                                    }
 
-                        // Get canvas element
-                        const ctx = document.getElementById('iperfChart').getContext('2d');
-
-                        // Create chart
-                        const iperfChart = new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                labels: iperfData.labels,
-                                datasets: [{
-                                    label: 'Data Send (Mbps)',
-                                    data: iperfData.values,
-                                    borderColor: 'blue',
-                                    backgroundColor: 'rgba(0, 0, 255, 0.2)', // Optional
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    yAxes: [{
-                                        ticks: {
-                                            beginAtZero: true
-                                        }
-                                    }]
+                                    ]
+                                },
+                            
+                                options: {
+                                    scales: {scales:{yAxes: [{beginAtZero: true}], xAxes: [{autoskip: true, maxTicketsLimit: 20}]}},
+                                    tooltips:{mode: 'index'},
+                                    legend:{display: true, position: 'top', labels: {fontColor: 'rgb(255,255,255)', fontSize: 16}}
                                 }
-                            }
-                        });
-                    </script>
+                            });
+                            </script>
                 </div>
-            </div>
-        </div>
+                </div>
+                <div class="tabular--wrapper">
+                <h3 class="main--title">The packet received</h3>
+                <div class="table-container">
+                        <canvas id="chart_2" style="width: 100%; height: 65vh; background: #222; border: 1px solid #555652; margin-top: 10px;"></canvas>
+
+                            <script>
+                                var ctx3 = document.getElementById("chart_2").getContext('2d');
+                                var myChart = new Chart(ctx3, {
+                                type: 'line',
+                                data: {
+                                    labels: [<?php echo $timestamp; ?>],
+                                    datasets: 
+                                    [{
+                                        label: 'Bandwidth (Mbps)',
+                                        data: [<?php echo $data1; ?>],
+                                        backgroundColor: 'transparent',
+                                        borderColor:'rgba(255,99,132,1)',
+                                        borderWidth: 3
+                                    },
+
+                                    {
+                                        label: 'Packet Loss (bytes)',
+                                        data: [<?php echo $data2; ?>],
+                                        backgroundColor: 'transparent',
+                                        borderColor:'rgba(0,255,255,1)',
+                                        borderWidth: 3	
+                                    }]
+                                },
+                            
+                                options: {
+                                    scales: {scales:{yAxes: [{beginAtZero: true}], xAxes: [{autoskip: true, maxTicketsLimit: 20}]}},
+                                    tooltips:{mode: 'index'},
+                                    legend:{display: true, position: 'top', labels: {fontColor: 'rgb(255,255,255)', fontSize: 16}}
+                                }
+                            });
+                            </script>
+                </div>
+                </div>
+                <div class="tabular--wrapper">
+                <h3 class="main--title">The packet loss</h3>
+                <div class="table-container">
+                        <canvas id="chart_3" style="width: 100%; height: 65vh; background: #222; border: 1px solid #555652; margin-top: 10px;"></canvas>
+
+                            <script>
+                                var ctx4 = document.getElementById("chart_3").getContext('2d');
+                                var myChart = new Chart(ctx4, {
+                                type: 'line',
+                                data: {
+                                    labels: [<?php echo $timestamp; ?>],
+                                    datasets: 
+                                    [{
+                                        label: 'Bandwidth (Mbps)',
+                                        data: [<?php echo $data1; ?>],
+                                        backgroundColor: 'transparent',
+                                        borderColor:'rgba(255,99,132,1)',
+                                        borderWidth: 3
+                                    },
+
+                                    {
+                                        label: 'Packet Loss (bytes)',
+                                        data: [<?php echo $data2; ?>],
+                                        backgroundColor: 'transparent',
+                                        borderColor:'rgba(0,255,255,1)',
+                                        borderWidth: 3	
+                                    }]
+                                },
+                            
+                                options: {
+                                    scales: {scales:{yAxes: [{beginAtZero: true}], xAxes: [{autoskip: true, maxTicketsLimit: 20}]}},
+                                    tooltips:{mode: 'index'},
+                                    legend:{display: true, position: 'top', labels: {fontColor: 'rgb(255,255,255)', fontSize: 16}}
+                                }
+                            });
+                            </script>
+                        </div>
+                </div>
+            
     </body>
 </html>

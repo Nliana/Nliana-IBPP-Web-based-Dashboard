@@ -11,6 +11,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dashboard Design</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css" />
         <!-- Font Awesome Cdn Link-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
@@ -59,15 +60,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="faq.php">
-                        <i class="fas fa-question-circle"></i>
-                        <span>FAQ</span>
+                    <a href="past_test.php">
+                        <i class="fas fa-book"></i>
+                        <span>Past Tests</span>
                     </a>
                 </li>
                 <li class="settings">
-                    <a href="settings.php">
-                        <i class="fas fa-cog"></i>
-                        <span>Settings</span>
+                    <a href="faq.php">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
                     </a>
                 </li>
             </ul>
@@ -80,7 +81,7 @@
                     <h2>Dashboard</h2>
                 </div>
                 <div class="user--info">
-
+                    <a href="logout.php" class="btn btn-warning">Logout</a>
                     <input type="button" value="Download PDF" onclick="printDiv()"> <!--Button to download page as pdf-->
                     <!-- <button id="btn">Download Report</button> -->
                     

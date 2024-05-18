@@ -58,15 +58,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="faq.php">
-                        <i class="fas fa-question-circle"></i>
-                        <span>FAQ</span>
+                    <a href="past_test.php">
+                        <i class="fas fa-book"></i>
+                        <span>Past Tests</span>
                     </a>
                 </li>
                 <li class="settings">
-                    <a href="settings.php">
-                        <i class="fas fa-cog"></i>
-                        <span>Settings</span>
+                    <a href="faq.php">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
                     </a>
                 </li>
             </ul>
@@ -93,60 +93,65 @@
                     <h2>Welcome</h2>
                     <h4>Please choose one or more testings to be done or go to the dashboard to view past tests</h4>
                 </div>
-                <div class="card--wrapper">
-                    <div class="payment--card light-red">
+
+                <form action="options_process.php" method="post">
+                    <div class="card--wrapper">
+                        <div class="payment--card light-red">
+                            <div class="card--header">
+                                <div class="amount">
+                                    <span class="title">
+                                        Benchmark Network Throughput
+                                    </span>
+                                    <span class="amount--value">
+                                        <i class="fas fa-signal"></i>   
+                                    </span>   
+                                </div>  
+                                <label class="check--container"> <!--checkbox-->
+                                    <input type="checkbox" name='check[]' value = "benchmark">
+                                    <span class="checkmark"></span>
+                                </label>  
+                            </div>
+                    </div>
+
+                    <div class="payment--card light-purple">
                         <div class="card--header">
                             <div class="amount">
                                 <span class="title">
-                                    Benchmark Network Throughput
+                                    Penetration Testing
                                 </span>
                                 <span class="amount--value">
-                                    <i class="fas fa-signal"></i>   
-                                </span>   
-                            </div>  
+                                    <i class="fas fa-flask-vial"></i>
+                                </span>
+                            </div>
                             <label class="check--container"> <!--checkbox-->
-                                <input type="checkbox">
+                                <input type="checkbox" name='check[]' value = "pentest">
                                 <span class="checkmark"></span>
-                            </label>  
-                        </div>
-                </div>
+                            </label> 
+                        </div>      
+                    </div>
 
-                <div class="payment--card light-purple">
-                    <div class="card--header">
-                        <div class="amount">
-                            <span class="title">
-                                Penetration Testing
-                            </span>
-                            <span class="amount--value">
-                                <i class="fas fa-flask-vial"></i>
-                            </span>
-                        </div>
-                        <label class="check--container"> <!--checkbox-->
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label> 
-                    </div>      
-                </div>
+                    <div class="payment--card light-green">
+                        <div class="card--header">
+                            <div class="amount">
+                                <span class="title">
+                                    Monitor Network Traffic
+                                </span>
+                                <span class="amount--value">
+                                    <i class="fas fa-eye"></i>
+                                </span>
+                            </div>
+                            <label class="check--container"> <!--checkbox-->
+                                <input type="checkbox" name='check[]' value = "monitor">
+                                <span class="checkmark"></span>
+                            </label> 
+                        </div>      
+                    </div>
 
-                <div class="payment--card light-green">
-                    <div class="card--header">
-                        <div class="amount">
-                            <span class="title">
-                                Monitor Network Traffic
-                            </span>
-                            <span class="amount--value">
-                                <i class="fas fa-eye"></i>
-                            </span>
-                        </div>
-                        <label class="check--container"> <!--checkbox-->
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label> 
-                    </div>      
-                </div>
-
-                <a href="test_chosen.php" class="btn btn-warning">Run Test</a>
-
+                    <div class="form--group">
+                        <input type="submit" class="btn btn-success" value="Submit Choice" name="submit_choice">
+                    </div>
+                    <!-- <a href="test_chosen.php" class="btn btn-warning">Run Test</a> -->
+                </form>
                 </div>
             </div>
         </div>
