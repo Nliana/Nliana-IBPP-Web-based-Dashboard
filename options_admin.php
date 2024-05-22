@@ -1,5 +1,5 @@
 <?php
-    @include "database_2.php";
+    @include "database.php";
     session_start();
     if (!isset($_SESSION["admin_name"])){
         header("Location: login.php");
@@ -85,12 +85,10 @@
                     <h2>IoT Benchmarking and Pentesting Platform</h2>
                 </div>
                 <div class="user--info">
-                    <a href="logout.php" class="btn btn-warning">Logout</a>
-                    <div class="search--box">
-                    <i class="fa-solid fa-search"></i>
-                    <input type="text" placeholder="Search" />
+                    <div class="admin--content">
+                        <h6><span>Admin, <?php echo $_SESSION["admin_name"]?></span></h6> 
                     </div>
-                    <img src="./image/img.jpg" alt=""> <!-- Change Image -->
+                    <a href="logout.php" class="btn btn-warning">Logout</a>
                 </div>
             </div>
         
@@ -98,67 +96,90 @@
             <div class="card--container">
                 <div class="main--title">
                     <h2>Welcome</h2>
-                    <h4>Please choose one or more testings to be done or go to the dashboard to view past tests</h4>
                 </div>
 
-                <form action="options_process.php" method="post">
-                    <div class="card--wrapper">
-                        <div class="payment--card light-red">
-                            <div class="card--header">
-                                <div class="amount">
-                                    <span class="title">
-                                        Benchmark Network Throughput
-                                    </span>
-                                    <span class="amount--value">
-                                        <i class="fas fa-signal"></i>   
-                                    </span>   
-                                </div>  
-                                <label class="check--container"> <!--checkbox-->
-                                    <input type="checkbox" name='check[]' value = "benchmark">
-                                    <span class="checkmark"></span>
-                                </label>  
-                            </div>
-                    </div>
+                <div class="container">
+                    <header class="d-flex justify-content-between my-4">
+                        <h3><span>Add IoT Device</span></h3>
+                        <!-- <a href="options_1.php" class="btn btn-primary">Back</a> -->
+                    </header>
 
-                    <div class="payment--card light-purple">
-                        <div class="card--header">
-                            <div class="amount">
-                                <span class="title">
-                                    Penetration Testing
-                                </span>
-                                <span class="amount--value">
-                                    <i class="fas fa-flask-vial"></i>
-                                </span>
-                            </div>
-                            <label class="check--container"> <!--checkbox-->
-                                <input type="checkbox" name='check[]' value = "pentest">
-                                <span class="checkmark"></span>
-                            </label> 
-                        </div>      
-                    </div>
+                    <form action="device_process.php" method="post">
+                        <div class="form--group my-4">
+                            <label>Enter Device Type</label> <!-- Add Device Type !!!!!!!!!! add example like switch, router-->
+                            <input type="text" class="form-control" name="device_type" placeholder="Example: Switch, Router...">
+                        </div>
+                        <div class="form--group my-4">
+                            <label>Enter Device Name</label> <!-- Add Device Name !!!!!!!!!! add example like cisco, netgear-->
+                            <input type="text" class="form-control" name="device_name" placeholder="Example: Cisco 9000, HP Switch...">
+                        </div>
+                        <div class="form--group"> 
+                            <input type="submit" class="btn btn-success" value="Add Device" name="create_device">
+                        </div>
 
-                    <div class="payment--card light-green">
-                        <div class="card--header">
-                            <div class="amount">
-                                <span class="title">
-                                    Monitor Network Traffic
-                                </span>
-                                <span class="amount--value">
-                                    <i class="fas fa-eye"></i>
-                                </span>
+                        <!-- TRY TO FIX THE SUBMIT BUTTON TO CONDUCT THE TEST AND SUBMIT TO THE DATABASE -->
+                
+                        <header class="d-flex justify-content-between my-4">
+                        <h3><span>Please choose one or more testings to be done or go to the dashboard to view past tests</span></h3>
+                                <!-- <a href="options_1.php" class="btn btn-primary">Back</a> -->
+                        </header>               
+                            <div class="card--wrapper">
+                                <div class="payment--card light-red">
+                                    <div class="card--header">
+                                        <div class="amount">
+                                            <span class="title">
+                                                Benchmark Network Throughput
+                                            </span>
+                                            <span class="amount--value">
+                                                <i class="fas fa-signal"></i>   
+                                            </span>   
+                                        </div>  
+                                        <label class="check--container"> <!--checkbox-->
+                                            <input type="checkbox" name='check[]' value = "benchmark">
+                                            <span class="checkmark"></span>
+                                        </label>  
+                                    </div>
                             </div>
-                            <label class="check--container"> <!--checkbox-->
-                                <input type="checkbox" name='check[]' value = "monitor">
-                                <span class="checkmark"></span>
-                            </label> 
-                        </div>      
-                    </div>
 
-                    <div class="form--group">
-                        <input type="submit" class="btn btn-success" value="Submit Choice" name="submit_choice">
-                    </div>
-                    <!-- <a href="test_chosen.php" class="btn btn-warning">Run Test</a> -->
-                </form>
+                            <div class="payment--card light-purple">
+                                <div class="card--header">
+                                    <div class="amount">
+                                        <span class="title">
+                                            Penetration Testing
+                                        </span>
+                                        <span class="amount--value">
+                                            <i class="fas fa-flask-vial"></i>
+                                        </span>
+                                    </div>
+                                    <label class="check--container"> <!--checkbox-->
+                                        <input type="checkbox" name='check[]' value = "pentest">
+                                        <span class="checkmark"></span>
+                                    </label> 
+                                </div>      
+                            </div>
+
+                            <div class="payment--card light-green">
+                                <div class="card--header">
+                                    <div class="amount">
+                                        <span class="title">
+                                            Monitor Network Traffic
+                                        </span>
+                                        <span class="amount--value">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                    </div>
+                                    <label class="check--container"> <!--checkbox-->
+                                        <input type="checkbox" name='check[]' value = "monitor">
+                                        <span class="checkmark"></span>
+                                    </label> 
+                                </div>      
+                            </div>
+
+                            <div class="form--group">
+                                <input type="submit" class="btn btn-success" value="Submit Choice" name="start_choice">
+                            </div>
+                            <!-- <a href="test_chosen.php" class="btn btn-warning">Run Test</a> -->
+                        </form>
                 </div>
             </div>
         </div>

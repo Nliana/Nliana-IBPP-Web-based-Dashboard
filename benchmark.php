@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if (!isset($_SESSION["users"])){
+    if (!isset($_SESSION["user_name"])){
         header("Location: login.php");
     }
 
@@ -111,12 +111,10 @@
                     <h2>Benchmark Network Throughput</h2>
                 </div>
                 <div class="user--info">
-                    <a href="logout.php" class="btn btn-warning">Logout</a>
-                    <div class="search--box">
-                    <i class="fa-solid fa-search"></i>
-                    <input type="text" placeholder="Search" />
+                    <div class="admin--content">
+                        <h6><span>User, <?php echo $_SESSION["user_name"]?></span></h6> 
                     </div>
-                    <img src="./image/img.jpg" alt=""> <!-- Change Image -->
+                    <a href="logout.php" class="btn btn-warning">Logout</a>
                 </div>
             </div>
         

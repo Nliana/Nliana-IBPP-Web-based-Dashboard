@@ -1,11 +1,11 @@
 <?php
-include "database_2.php";
+include "database.php";
 if (isset($_POST["create"])){
-    $full_name = mysqli_real_escape_string($db2, $_POST["fullname"]); //to prevent sql injection
-    $email = mysqli_real_escape_string($db2,$_POST["email"]);
-    $password = mysqli_real_escape_string($db2,$_POST["password"]);
-    $password_repeat = mysqli_real_escape_string($db2,$_POST["repeat_password"]);
-    $user_type = mysqli_real_escape_string($db2,$_POST["user--type"]);
+    $full_name = mysqli_real_escape_string($db, $_POST["fullname"]); //to prevent sql injection
+    $email = mysqli_real_escape_string($db,$_POST["email"]);
+    $password = mysqli_real_escape_string($db,$_POST["password"]);
+    $password_repeat = mysqli_real_escape_string($db,$_POST["repeat_password"]);
+    $user_type = mysqli_real_escape_string($db,$_POST["user--type"]);
 
     $password_hash = password_hash($password, PASSWORD_DEFAULT); //need know the hash algorithm
 
@@ -24,9 +24,9 @@ if (isset($_POST["create"])){
         array_push($errors, "Passwords do not match");
     }
 
-    require_once "database_2.php";
-    $sql = "SELECT * FROM user WHERE email = '$email'"; //no registration of same email address
-    $result = mysqli_query($db2, $sql);
+    require_once "database.php";
+    $sql = "SELECT * FROM user_test WHERE email = '$email'"; //no registration of same email address
+    $result = mysqli_query($db, $sql);
     $rowCount = mysqli_num_rows($result); //check if the email already exists in the database
     if ($rowCount > 0){
         array_push($errors, "Email already exists");
@@ -35,8 +35,8 @@ if (isset($_POST["create"])){
     if (count($errors) == 0){
         //data will be submitted into the database
         
-        $sql = "INSERT INTO user (full_name, email, password, user_type) VALUES ( ?, ?, ?, ? )"; //placeholder to avoid sql injection
-        $stmt = mysqli_stmt_init($db2);
+        $sql = "INSERT INTO user_test (full_name, email, password, user_type) VALUES ( ?, ?, ?, ? )"; //placeholder to avoid sql injection
+        $stmt = mysqli_stmt_init($db);
         $prep_stmt = mysqli_stmt_prepare($stmt, $sql);
         if ($prep_stmt){
             mysqli_stmt_bind_param($stmt, "ssss", $full_name, $email, $password_hash, $user_type);
@@ -55,12 +55,12 @@ if (isset($_POST["create"])){
 }
 
 if (isset($_POST["edit"])){ ////////DOUBLE CHECK FOR THIS PART!!
-    $full_name = mysqli_real_escape_string($db2, $_POST["fullname"]); //to prevent sql injection
-    $email = mysqli_real_escape_string($db2,$_POST["email"]);
-    $password = mysqli_real_escape_string($db2,$_POST["password"]);
-    $password_repeat = mysqli_real_escape_string($db2,$_POST["repeat_password"]);
-    $user_type = mysqli_real_escape_string($db2,$_POST["user--type"]);
-    $user_id = mysqli_real_escape_string($db2,$_POST["user_id"]);
+    $full_name = mysqli_real_escape_string($db, $_POST["fullname"]); //to prevent sql injection
+    $email = mysqli_real_escape_string($db,$_POST["email"]);
+    $password = mysqli_real_escape_string($db,$_POST["password"]);
+    $password_repeat = mysqli_real_escape_string($db,$_POST["repeat_password"]);
+    $user_type = mysqli_real_escape_string($db,$_POST["user--type"]);
+    $user_id = mysqli_real_escape_string($db,$_POST["user_id"]);
 
     $password_hash = password_hash($password, PASSWORD_DEFAULT); //need know the hash algorithm
 
@@ -76,8 +76,8 @@ if (isset($_POST["edit"])){ ////////DOUBLE CHECK FOR THIS PART!!
         array_push($errors, "Passwords do not match");
     }
 
-    $sql = "UPDATE user SET full_name = ?, email = ?, password = ?, user_type = ? WHERE user_id = $user_id"; 
-    $stmt = mysqli_stmt_init($db2);
+    $sql = "UPDATE user_test SET full_name = ?, email = ?, password = ?, user_type = ? WHERE user_id = $user_id"; 
+    $stmt = mysqli_stmt_init($db);
     $prep_stmt = mysqli_stmt_prepare($stmt, $sql);
     if ($prep_stmt){
         mysqli_stmt_bind_param($stmt, "ssss", $full_name, $email, $password_hash, $user_type);

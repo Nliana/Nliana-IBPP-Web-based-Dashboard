@@ -1,9 +1,9 @@
 <?php
-    @include "database_2.php";
-    session_start();
-    if (!isset($_SESSION["admin_name"])){
-        header("Location: login.php");
-    }
+    @include "database.php";
+    // session_start();
+    // if (!isset($_SESSION["admin_name"])){
+    //     header("Location: login.php");
+    // }
 ?>
 
 <!DOCTYPE html>
@@ -19,13 +19,13 @@
     <div class="registration--container">
         <?php
         if (isset($_POST["submit"])){
-            $full_name = mysqli_real_escape_string($db2, $_POST["fullname"]); //to prevent sql injection
-            $email = mysqli_real_escape_string($db2,$_POST["email"]);
-            $password = mysqli_real_escape_string($db2,$_POST["password"]);
-            $password_repeat = mysqli_real_escape_string($db2,$_POST["repeat_password"]);
-            $user_type = mysqli_real_escape_string($db2,$_POST["user--type"]);
+            $full_name = mysqli_real_escape_string($db, $_POST["fullname"]); //to prevent sql injection
+            $email = mysqli_real_escape_string($db,$_POST["email"]);
+            $password = mysqli_real_escape_string($db,$_POST["password"]);
+            $password_repeat = mysqli_real_escape_string($db,$_POST["repeat_password"]);
+            $user_type = mysqli_real_escape_string($db,$_POST["user--type"]);
 
-            $password_hash = password_hash($password, PASSWORD_DEFAULT); //need know the hash algorithm
+            $password_hash = password_hash($password, PASSWORD_DEFAULT); //Use the bcrypt algorithm (default as of PHP 5.5.0).
 
             $errors = array();
 
@@ -38,13 +38,30 @@
             if (strlen($password) < 8){
                 array_push($errors, "Password must be at least 8 characters long");
             }
+            
+            if (!preg_match('/[!@#$%^&*(),.?":{}|<>]/', $password)) {
+                array_push($errors, "Password must include at least one special character");
+            }
+            
+            if (!preg_match('/[A-Z]/', $password)) {
+                array_push($errors, "Password must include at least one uppercase letter");
+            }
+            
+            if (!preg_match('/[a-z]/', $password)) {
+                array_push($errors, "Password must include at least one lowercase letter");
+            }
+            
+            if (!preg_match('/[0-9]/', $password)) {
+                array_push($errors, "Password must include at least one number");
+            }
+            
             if ($password != $password_repeat){
                 array_push($errors, "Passwords do not match");
             }
 
-            require_once "database_2.php";
-            $sql = "SELECT * FROM user WHERE email = '$email'"; //no registration of same email address
-            $result = mysqli_query($db2, $sql);
+            require_once "database.php";
+            $sql = "SELECT * FROM user_test WHERE email = '$email'"; //no registration of same email address
+            $result = mysqli_query($db, $sql);
             $rowCount = mysqli_num_rows($result); //check if the email already exists in the database
             if ($rowCount > 0){
                 array_push($errors, "Email already exists");
@@ -53,8 +70,8 @@
             if (count($errors) == 0){
                 //data will be submitted into the database
                 
-                $sql = "INSERT INTO user (full_name, email, password, user_type) VALUES ( ?, ?, ?, ? )"; //placeholder to avoid sql injection
-                $stmt = mysqli_stmt_init($db2);
+                $sql = "INSERT INTO user_test (full_name, email, password, user_type) VALUES ( ?, ?, ?, ? )"; //placeholder to avoid sql injection
+                $stmt = mysqli_stmt_init($db);
                 $prep_stmt = mysqli_stmt_prepare($stmt, $sql);
                 if ($prep_stmt){
                     mysqli_stmt_bind_param($stmt, "ssss", $full_name, $email, $password_hash, $user_type);
@@ -91,7 +108,6 @@
             </div>
             <select name="user--type"> <!-- remove this user type -->
                 <option value="user">user</option>
-                <option value="admin">admin</option>
             </select>
             <div class="form--group">
                 <input type="submit" class="btn btn-primary" value="Register" name="submit">

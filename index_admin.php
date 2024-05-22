@@ -1,11 +1,36 @@
 <?php
     session_start();
-    if (!isset($_SESSION["users"])){
+    if (!isset($_SESSION["admin_name"])){
         header("Location: login.php");
     }
 
+    /* Database connection settings */
+	include_once 'iperf_data.php';
 
-    ///add the graph connection here!!!
+	$data1 = '';
+	// $data2 = '';
+    // $data3 = '';
+    // $data4 = '';
+	$timestamp = '';
+
+	$query = "SELECT iperf_results.timestamp, iperf_results.bandwidth, iperf_results.packet_loss, iperf_results.packets_sent, iperf_results.packets_received FROM iperf_results ORDER BY iperf_results.timestamp ASC";
+	
+    $runQuery = mysqli_query($conn, $query);
+
+	while ($row = mysqli_fetch_array($runQuery)) {
+
+		$data1 = $data1 . '"'. $row['bandwidth'].'",';
+		// $data2 = $data2 . '"'. $row['packet_loss'] .'",';
+        // $data3 = $data3 . '"'. $row['packets_sent'] .'",';
+        // $data4 = $data4 . '"'. $row['packets_received'] .'",';
+		$timestamp = $timestamp . '"'. ucwords($row['timestamp']) .'",';
+	}
+
+	$data1 = trim($data1,",");
+	// $data2 = trim($data2,",");
+    // $data3 = trim($data3,",");
+    // $data4 = trim($data4,",");
+	$timestamp = trim($timestamp,",");
 ?>
 
 <!DOCTYPE html>
@@ -90,15 +115,12 @@
                     <h2>Dashboard</h2>
                 </div>
                 <div class="user--info">
-                    <a href="logout.php" class="btn btn-warning">Logout</a>
+                    <div class="admin--content">
+                        <h6><span>Admin, <?php echo $_SESSION["admin_name"]?></span></h6> 
+                    </div>
                     <input type="button" value="Download PDF" onclick="printDiv()"> <!--Button to download page as pdf-->
                     <!-- <button id="btn">Download Report</button> -->
-                    
-                    <div class="search--box">
-                    <i class="fa-solid fa-search"></i>
-                    <input type="text" placeholder="Search" />
-                    </div>
-                    <img src="./image/img.jpg" alt=""> <!-- Change Image -->
+                    <a href="logout.php" class="btn btn-warning">Logout</a>
                 </div>
             </div>
         

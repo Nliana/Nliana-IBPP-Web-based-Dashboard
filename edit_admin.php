@@ -15,9 +15,9 @@
         <?php
         if (isset($_GET["user_id"])){
             $user_id = $_GET["user_id"];
-            include ("database_2.php");
-            $sql = "SELECT * FROM user WHERE user_id = $user_id";
-            $result = mysqli_query($db2, $sql);
+            include ("database.php");
+            $sql = "SELECT * FROM user_test WHERE user_id = $user_id";
+            $result = mysqli_query($db, $sql);
             $row = mysqli_fetch_array($result);
 
             ?>
@@ -31,14 +31,14 @@
                 <label>Email</label>
                 <input type="email" class="form-control" name="email" value="<?php echo $row["email"]; ?>" placeholder="Email:">
             </div>
-            <div class="form--group my-4">
+            <!-- <div class="form--group my-4">
                 <label>Password</label>
                 <input type="password" class="form-control" name="password" value="<?php echo $row["password"]; ?>" placeholder="Password:">
             </div>
             <div class="form--group my-4">
                 <label>Confirm Password</label>
                 <input type="password" class="form-control" name="repeat_password" placeholder="Repeat Password:">
-            </div>
+            </div> -->
             <div class="form--element my-4">
                 <select name="user--type" class="form-control"> <!-- remove this user type -->
                     <option value="">Select Privilege Type</option>

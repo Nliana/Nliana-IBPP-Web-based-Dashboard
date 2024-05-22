@@ -22,9 +22,9 @@
             <?php
                 if(isset($_GET["user_id"])){
                     $user_id = $_GET["user_id"];
-                    include ("database_2.php");
-                    $sql = "SELECT * FROM user WHERE user_id = $user_id";
-                    $result = mysqli_query($db2, $sql);
+                    include ("database.php");
+                    $sql = "SELECT * FROM user_test WHERE user_id = $user_id";
+                    $result = mysqli_query($db, $sql);
                     $row = mysqli_fetch_array($result);
 
                 ?>
@@ -32,8 +32,8 @@
                     <p><?php echo $row["full_name"]; ?></p>
                     <h2>Email</h2>
                     <p><?php echo $row["email"]; ?></p>
-                    <h2>Password Hash</h2>
-                    <p><?php echo $row["password"]; ?></p>
+                    <!-- <h2>Password Hash</h2>
+                    <p><?php echo $row["password"]; ?></p> -->
                     <h2>Privilege Type</h2>
                     <p><?php echo $row["user_type"]; ?></p>
                 <?php

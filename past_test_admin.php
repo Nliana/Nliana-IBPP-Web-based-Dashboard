@@ -1,5 +1,5 @@
 <?php
-    @include "database_2.php";
+    @include "database.php";
     session_start();
     if (!isset($_SESSION["admin_name"])){
         header("Location: login.php");
@@ -85,11 +85,9 @@
                     <h2>Past Test Results</h2>
                 </div>
                 <div class="user--info">
-                    <a href="logout.php" class="btn btn-warning">Logout</a>
-                    <div class="search--box">
-                    <i class="fa-solid fa-search"></i>
-                    <input type="text" placeholder="Search" />
+                    <div class="admin--content">
+                        <h6><span>Admin, <?php echo $_SESSION["admin_name"]?></span></h6> 
                     </div>
-                    <img src="./image/img.jpg" alt=""> <!-- Change Image -->
+                    <a href="logout.php" class="btn btn-warning">Logout</a>
                 </div>
             </div>

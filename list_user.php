@@ -128,9 +128,9 @@
             </thead>
             <tbody>
                 <?php
-                include "database_2.php";
-                $sql = "SELECT * FROM user";
-                $result = mysqli_query($db2, $sql);
+                include "database.php";
+                $sql = "SELECT * FROM user_test";
+                $result = mysqli_query($db, $sql);
                 $row = mysqli_fetch_array($result);
                 while ($row = mysqli_fetch_array($result)) {
                 ?>

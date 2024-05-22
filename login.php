@@ -15,15 +15,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    
     <div class="registration--container">
-
         <?php
         if (isset($_POST["login"])){
             $email = $_POST["email"];
             $password = $_POST["password"];
-            require_once "database_2.php"; //connecting to the database
-            $sql = "SELECT * FROM user WHERE email = '$email'";
-            $result = mysqli_query($db2, $sql); //execute the command using query
+            require_once "database.php"; //connecting to the database
+            $sql = "SELECT * FROM user_test WHERE email = '$email'";
+            $result = mysqli_query($db, $sql); //execute the command using query
             $users = mysqli_fetch_array($result, MYSQLI_ASSOC); //fetch the result as an associative array
             if ($users) { //Check whether email exists or match
                 if (password_verify($password, $users["password"])) {
@@ -31,13 +31,13 @@
                         session_start();
                         $_SESSION["admin_name"] = $users["full_name"];
                         $_SESSION["users"] = "yes";
-                        header("Location: welcome_admin.php");
+                        header("Location: options_admin.php");
                         die();
                     } elseif ($users["user_type"] == "user"){
                         session_start();
                         $_SESSION["user_name"] = $users["full_name"];
                         $_SESSION["users"] = "yes";
-                        header("Location: welcome_user.php");
+                        header("Location: options.php");
                         die();
                     }
                 } else {
@@ -50,8 +50,9 @@
         }
 
         ?>
-
+        
         <form action="login.php" method="post">
+            
             <h3>Login Now</h3>
             <div class="form--group">
                 <input type="email" placeholder="Enter your email:" name="email" class="form-control">

@@ -13,28 +13,6 @@
             <a href="list_user.php" class="btn btn-primary">Back</a>
         </header>
 
-        <!-- <form action="" method="post">
-            <div class="form--element my-4">
-                <input type="text" class="form-control" name="title" placeholder="Book Title:">
-            </div>
-            <div class="form--element my-4">
-                <input type="text" class="form-control" name="author" placeholder="User Privilege:">
-            </div>
-            <div class="form--element my-4">
-                <select name="type" class="form-control">
-                    <option value="">Select Privilege Type</option>
-                    <option value="User">User</option>
-                    <option value="Admin">Admin</option>
-                </select>
-            </div>
-            <div class="form--element my-4">
-                <input type="text" class="form-control" name="description" placeholder="Book Description:">
-            </div>
-            <div class="form-element">
-                <input type="submit" class="btn btn-success" name="create" value="Add Book">
-            </div>
-        </form> -->
-
         <form action="process_admin.php" method="post">
             <div class="form--group my-4">
                 <label>Full Name</label>
