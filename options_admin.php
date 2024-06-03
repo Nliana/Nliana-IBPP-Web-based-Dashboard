@@ -4,6 +4,14 @@
     if (!isset($_SESSION["admin_name"])){
         header("Location: login.php");
     }
+
+    // if (isset($_GET["user_id"])){
+    //     $user_id = $_GET["user_id"];
+    //     include ("database.php");
+    //     $sql = "SELECT user_id FROM user_test WHERE user_id = $user_id";
+    //     // $result = mysqli_query($db, $sql);
+    //     // $row = mysqli_fetch_array($result);
+    // }
 ?>
 
 <!DOCTYPE html>
@@ -104,7 +112,8 @@
                         <!-- <a href="options_1.php" class="btn btn-primary">Back</a> -->
                     </header>
 
-                    <form action="device_process.php" method="post">
+                    <form action="device_process.php" method="POST">
+                        
                         <div class="form--group my-4">
                             <label>Enter Device Type</label> <!-- Add Device Type !!!!!!!!!! add example like switch, router-->
                             <input type="text" class="form-control" name="device_type" placeholder="Example: Switch, Router...">
@@ -112,6 +121,10 @@
                         <div class="form--group my-4">
                             <label>Enter Device Name</label> <!-- Add Device Name !!!!!!!!!! add example like cisco, netgear-->
                             <input type="text" class="form-control" name="device_name" placeholder="Example: Cisco 9000, HP Switch...">
+                        </div>
+                        <div class="form--group"> 
+                            <input type="hidden" name="admin_name" value="<?php echo $_SESSION['admin_name']; ?>">
+
                         </div>
                         <div class="form--group"> 
                             <input type="submit" class="btn btn-success" value="Add Device" name="create_device">

@@ -1,3 +1,11 @@
+<?php
+    @include "database.php";
+    session_start();
+    if (!isset($_SESSION["admin_name"])){
+        header("Location: login.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +17,11 @@
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <script>
+        function confirmDelete() {
+            return confirm("Are you sure you want to delete this user or admin?");
+        }
+    </script>
     <title>User and Admin List</title>
 </head>
 <body>
@@ -71,13 +84,26 @@
             </ul>
         </div>
 
+        <div class="main--content">
+            <div class="header--wrapper">
+                <div class="header--title">
+                    <h2>IoT Benchmarking and Pentesting Platform</h2>
+                </div>
+                <div class="user--info">
+                    <div class="admin--content">
+                        <h6><span>Admin, <?php echo $_SESSION["admin_name"]?></span></h6> 
+                    </div>
+                    <a href="logout.php" class="btn btn-warning">Logout</a>
+                </div>
+            </div>
+
     <div class="container">
         <header class="d-flex justify-content-between my-4">
             <h1>User and Admin List</h1>
             <a href="test_admin.php" class="btn btn-primary">Add New User</a>
         </header>
         <?php
-        session_start();
+        // session_start();
         if (isset($_SESSION["create"])){
             ?>
             <div class="alert alert-success">
@@ -142,7 +168,7 @@
                         <td>
                             <a href="view_admin.php?user_id=<?php echo $row["user_id"]; ?>" class="btn btn-info">More Detail</a>
                             <a href="edit_admin.php?user_id=<?php echo $row["user_id"]; ?>" class="btn btn-warning">Edit</a>
-                            <a href="delete_admin.php?user_id=<?php echo $row["user_id"]; ?>" class="btn btn-danger">Delete</a>
+                            <a href="delete_admin.php?user_id=<?php echo $row["user_id"]; ?>" class="btn btn-danger" onclick="return confirmDelete()">Delete</a>
                         </td>
                     </tr>
                 <?php

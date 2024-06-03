@@ -114,6 +114,7 @@
                     <div class="admin--content">
                         <h6><span>User, <?php echo $_SESSION["user_name"]?></span></h6> 
                     </div>
+                    <input type="button" value="Download PDF" onclick="printDiv()"> <!--Button to download page as pdf-->
                     <a href="logout.php" class="btn btn-warning">Logout</a>
                 </div>
             </div>
