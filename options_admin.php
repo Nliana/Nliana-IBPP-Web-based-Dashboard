@@ -169,9 +169,10 @@
                                                 <i class="fas fa-signal"></i>   
                                             </span>   
                                         </div>  
-                                        <label class="check--container"> <!--checkbox-->
-                                            <input type="checkbox" name='check[]' value = "benchmark">
+                                        <label for="executeCommand1" class="check--container"> <!--checkbox-->
+                                            <input type="checkbox" id="executeCommand1" name='executeCommand1' value = "yes">
                                             <span class="checkmark"></span>
+                                            <!-- <input type="checkbox" id="executeCommand1" name="executeCommand1" value="yes"><br> -->
                                         </label>  
                                     </div>
                             </div>
@@ -190,8 +191,8 @@
                                             <i class="fas fa-flask-vial"></i>
                                         </span>
                                     </div>
-                                    <label class="check--container"> <!--checkbox-->
-                                        <input type="checkbox" name='check[]' value = "pentest">
+                                    <label for="executeCommand2" class="check--container"> <!--checkbox-->
+                                        <input type="checkbox" id="executeCommand2" name='executeCommand2' value = "yes">
                                         <span class="checkmark"></span>
                                     </label> 
                                 </div>      
@@ -211,8 +212,8 @@
                                             <i class="fas fa-eye"></i>
                                         </span>
                                     </div>
-                                    <label class="check--container"> <!--checkbox-->
-                                        <input type="checkbox" name='check[]' value = "monitor">
+                                    <label for="executeCommand3" class="check--container"> <!--checkbox-->
+                                        <input type="checkbox" id="executeCommand3" name='executeCommand3' value = "yes">
                                         <span class="checkmark"></span>
                                     </label> 
                                 </div>      

@@ -308,8 +308,8 @@
                 </div>
             </div>
         
-            <div class="card--container container" id="mainReport">
-            <div class="row">
+            <div class="card--container" id="mainReport">
+            <div class="row d-flex justify-content-center align-items-center mx-auto">
                 <div class="card-wrapper col">
                     <div class="payment--card light-red">
                             <div class="icon--wrapper">
@@ -579,7 +579,7 @@
                             </script>
                         </div>
 
-                        <div class="card--wrapper col">
+                        <div class="card--wrapper d-flex justify-content-center align-items-center mx-auto">
                             <h5 class="text-center">Frame Protocols Distribution for the Latest Test</h5>
                             <!-- Line Chart -->
                             <div style="width: 550px;"><canvas id="myChart_5"></canvas></div>

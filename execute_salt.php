@@ -31,7 +31,6 @@
             $commands[] = "sudo salt 'raspi_2' cmd.run '/home/liana02/tshark_monitor.sh'";
         }
         if (isset($_POST['executeCommand2']) && $_POST['executeCommand2'] === 'yes') {
-            $commands[] = "sudo salt 'raspi_7' cmd.run '/home/liana/iperf3_setup.sh'"; //check back for the port number!!!!
             $commands[] = "sudo salt 'raspi_8' cmd.run '/home/liana08/iperf3_client.sh 10.207.161.27 6031'";    
         }
         if (isset($_POST['executeCommand3']) && $_POST['executeCommand3'] === 'yes') {

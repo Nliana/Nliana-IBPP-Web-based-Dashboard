@@ -146,8 +146,8 @@
                 <div class="faq-section">
                     <?php foreach ($faqs as $faq) : ?>
                         <div class="faq-item">
-                            <h3><?php echo $faq['question']; ?></h3>
-                            <p><?php echo $faq['answer']; ?></p>
+                            <h3><?php echo htmlspecialchars($faq['question']); ?></h3>
+                            <p><?php echo nl2br(htmlspecialchars($faq['answer'])); ?></p>
                         </div>
                     <?php endforeach; ?>
                 </div>
