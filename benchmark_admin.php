@@ -9,7 +9,7 @@
 
     
 	/* Database connection settings */
-	include_once 'iperf_data.php';
+	include_once 'database.php';
 
 	$data1 = '';
 	$data2 = '';
@@ -19,7 +19,7 @@
 
 	$query = "SELECT iperf_results.timestamp, iperf_results.bandwidth, iperf_results.packet_loss, iperf_results.packets_sent, iperf_results.packets_received FROM iperf_results ORDER BY iperf_results.timestamp ASC";
 	
-    $runQuery = mysqli_query($conn, $query);
+    $runQuery = mysqli_query($db, $query);
 
 	while ($row = mysqli_fetch_array($runQuery)) {
 
@@ -128,10 +128,10 @@
             </div>
         
         
-            <div class="card--container">
+            <div class="card--container container">
                 <h3 class="main--title">The Bandwidth</h3>
                 <div class="card--wrapper">
-                <canvas id="iperfChart_1" style="width: 100%; height: 65vh; background: #222; border: 1px solid #555652; margin-top: 10px;"></canvas>
+                <canvas id="iperfChart_1" style="width: 550px;"></canvas>
 
                     <script>
 
@@ -159,7 +159,7 @@
                                 options: {
                                     scales: {scales:{yAxes: [{beginAtZero: true}], xAxes: [{autoskip: true, maxTicketsLimit: 20}]}},
                                     tooltips:{mode: 'index'},
-                                    legend:{display: true, position: 'top', labels: {fontColor: 'rgb(255,255,255)', fontSize: 16}}
+                                    legend:{display: true, position: 'top', labels: {fontColor: 'rgb(0,0,0)', fontSize: 16}}
                                 }
                             });
                     </script>
@@ -169,7 +169,7 @@
             <div class="tabular--wrapper">
                 <h3 class="main--title">The packet loss</h3>
                 <div class="table-container">
-                        <canvas id="chart" style="width: 100%; height: 65vh; background: #222; border: 1px solid #555652; margin-top: 10px;"></canvas>
+                        <canvas id="chart" style="width: 550px;"></canvas>
 
                             <script>
                                 var ctx2 = document.getElementById("chart").getContext('2d');
@@ -181,7 +181,7 @@
                                     [{
                                         label: 'Packet Loss (Bytes)',
                                         data: [<?php echo $data2; ?>],
-                                        backgroundColor: 'transparent',
+                                        backgroundColor: 'rgba(0, 0, 255, 0.2)',
                                         borderColor:'rgba(255,99,132,1)',
                                         borderWidth: 3
                                     }
@@ -192,7 +192,7 @@
                                 options: {
                                     scales: {scales:{yAxes: [{beginAtZero: true}], xAxes: [{autoskip: true, maxTicketsLimit: 20}]}},
                                     tooltips:{mode: 'index'},
-                                    legend:{display: true, position: 'top', labels: {fontColor: 'rgb(255,255,255)', fontSize: 16}}
+                                    legend:{display: true, position: 'top', labels: {fontColor: 'rgb(0,0,0)', fontSize: 16}}
                                 }
                             });
                             </script>
@@ -201,7 +201,7 @@
                 <div class="tabular--wrapper">
                 <h3 class="main--title">The packet send</h3>
                 <div class="table-container">
-                        <canvas id="chart_2" style="width: 100%; height: 65vh; background: #222; border: 1px solid #555652; margin-top: 10px;"></canvas>
+                        <canvas id="chart_2" style="width: 550px;"></canvas>
 
                             <script>
                                 var ctx3 = document.getElementById("chart_2").getContext('2d');
@@ -213,7 +213,7 @@
                                     [{
                                         label: 'Packet Send (Bytes)',
                                         data: [<?php echo $data3; ?>],
-                                        backgroundColor: 'transparent',
+                                        backgroundColor: 'rgba(0, 0, 255, 0.2)',
                                         borderColor:'rgba(255,99,132,1)',
                                         borderWidth: 3
                                     }]
@@ -222,7 +222,7 @@
                                 options: {
                                     scales: {scales:{yAxes: [{beginAtZero: true}], xAxes: [{autoskip: true, maxTicketsLimit: 20}]}},
                                     tooltips:{mode: 'index'},
-                                    legend:{display: true, position: 'top', labels: {fontColor: 'rgb(255,255,255)', fontSize: 16}}
+                                    legend:{display: true, position: 'top', labels: {fontColor: 'rgb(0,0,0)', fontSize: 16}}
                                 }
                             });
                             </script>
@@ -231,7 +231,7 @@
                 <div class="tabular--wrapper">
                 <h3 class="main--title">The packet received</h3>
                 <div class="table-container">
-                        <canvas id="chart_3" style="width: 100%; height: 65vh; background: #222; border: 1px solid #555652; margin-top: 10px;"></canvas>
+                        <canvas id="chart_3" style="width: 550px;"></canvas>
 
                             <script>
                                 var ctx4 = document.getElementById("chart_3").getContext('2d');
@@ -243,7 +243,7 @@
                                     [{
                                         label: 'Packet Received (bytes)',
                                         data: [<?php echo $data4; ?>],
-                                        backgroundColor: 'transparent',
+                                        backgroundColor: 'rgba(0, 0, 255, 0.2)',
                                         borderColor:'rgba(255,99,132,1)',
                                         borderWidth: 3
                                     }]
@@ -252,7 +252,7 @@
                                 options: {
                                     scales: {scales:{yAxes: [{beginAtZero: true}], xAxes: [{autoskip: true, maxTicketsLimit: 20}]}},
                                     tooltips:{mode: 'index'},
-                                    legend:{display: true, position: 'top', labels: {fontColor: 'rgb(255,255,255)', fontSize: 16}}
+                                    legend:{display: true, position: 'top', labels: {fontColor: 'rgb(0,0,0)', fontSize: 16}}
                                 }
                             });
                             </script>

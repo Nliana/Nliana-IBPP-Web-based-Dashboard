@@ -122,17 +122,16 @@
                     <th>User ID</th>
                     <th>Device Type</th>
                     <th>Device Name</th>
+                    <th>Test ID</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <?php
+            <?php
                 include "database.php";
-                // $sql = "SELECT * FROM devices";
                 $sql = "SELECT devices.device_id, devices.user_id, devices.device_type, devices.device_name, tests.test_id
                 FROM devices LEFT JOIN tests ON devices.device_id = tests.device_id";
                 $result = mysqli_query($db, $sql);
-                // $row = mysqli_fetch_array($result);
                 while ($row = mysqli_fetch_array($result)) {
                 ?>
                     <tr>
@@ -140,6 +139,7 @@
                         <td><?php echo $row["user_id"]; ?></td>
                         <td><?php echo $row["device_type"]; ?></td>
                         <td><?php echo $row["device_name"]; ?></td>
+                        <td><?php echo $row["test_id"]; ?></td>
                         <td>
                             <a href="device_detail.php?user_id=<?php echo $row["user_id"]; ?>&device_id=<?php echo $row["device_id"]; ?>&test_id=<?php echo $row["test_id"]; ?>" class="btn btn-info">More Detail</a>
                             <a href="device_delete.php?device_id=<?php echo $row["device_id"]; ?>" class="btn btn-danger" onclick="return confirmDelete()">Delete</a>

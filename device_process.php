@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["create_device"])){
         $id_sql = "SELECT user_id FROM user_test WHERE full_name = '$admin_name'"; //no registration of same device name
         $result_id = mysqli_query($db, $id_sql);
 
-        $rowCountID = mysqli_num_rows($result_id); //check if the email already exists in the database
+        $rowCountID = mysqli_num_rows($result_id); //check if the id already exists in the database
         if ($rowCountID > 0){
             $rowUserID = mysqli_fetch_array($result_id, MYSQLI_ASSOC);
             $user_id = $rowUserID["user_id"];
@@ -65,6 +65,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["create_device"])){
         }
     }
      
+}
+
+if (isset($_POST['start_choice'])) {
+    // Check if at least one checkbox is selected
+    if (!isset($_POST['check']) || count($_POST['check']) === 0) {
+        $_SESSION['error_message'] = 'Please choose at least one testing option.';
+        header("Location: options_admin.php");
+        exit();
+    }
+
+    // Fetch the latest device_id
+    $query = "SELECT device_id FROM devices ORDER BY device_id DESC LIMIT 1";
+    $result = mysqli_query($db, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $latest_device_id = $row['device_id'];
+
+        // Update tests table with the latest device_id and current timestamp
+        $query = "INSERT INTO tests (device_id) VALUES (?)";
+        $stmt = $db->prepare($query);
+        $stmt->bind_param("i", $latest_device_id);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    header("Location: index_admin.php");
+    exit();
 }
 
 // // Check if form is submitted and at least one checkbox is selected

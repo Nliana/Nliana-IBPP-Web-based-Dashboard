@@ -6,7 +6,7 @@
 
     
 	/* Database connection settings */
-	include_once 'iperf_data.php';
+	include_once 'database.php';
 
 	$data1 = '';
 	$data2 = '';
@@ -16,7 +16,7 @@
 
 	$query = "SELECT iperf_results.timestamp, iperf_results.bandwidth, iperf_results.packet_loss, iperf_results.packets_sent, iperf_results.packets_received FROM iperf_results ORDER BY iperf_results.timestamp ASC";
 	
-    $runQuery = mysqli_query($conn, $query);
+    $runQuery = mysqli_query($db, $query);
 
 	while ($row = mysqli_fetch_array($runQuery)) {
 

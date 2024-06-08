@@ -4,6 +4,8 @@
     if (!isset($_SESSION["admin_name"])){
         header("Location: login.php");
     }
+
+    include 'faqs.php';
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +13,52 @@
     <head>
         <meta charset="UTF-8" />
         <title>Dashboard Design</title>
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .faq-section {
+            background: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .faq-item {
+            margin-bottom: 20px;
+        }
+        .faq-item h3 {
+            margin: 0;
+            padding: 0;
+            font-size: 1.2em;
+            color: #333;
+            cursor: pointer;
+            
+        }
+        .faq-item h3:hover {
+            margin: 0;
+            padding: 0;
+            font-size: 1.2em;
+            color: #4691B0;
+            cursor: pointer;
+            
+        }
+        .faq-item p {
+            display: none;
+            padding: 10px 0 0 0;
+            margin: 0;
+            font-size: 1em;
+            color: #666;
+        }
+         </style>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css" />
         <!-- Font Awesome Cdn Link-->
@@ -18,6 +66,7 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         />
+
     </head>
     <body>
         <div class="sidebar">
@@ -92,19 +141,28 @@
                 </div>
             </div>
         
-        
-            <div class="card--container">
-                <h3 class="main--title">Today's data</h3>
-                <div class="card--wrapper">
-                    
+            <div class="container">
+                <h1>Frequently Asked Questions</h1>
+                <div class="faq-section">
+                    <?php foreach ($faqs as $faq) : ?>
+                        <div class="faq-item">
+                            <h3><?php echo $faq['question']; ?></h3>
+                            <p><?php echo $faq['answer']; ?></p>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
 
-            <div class="tabular--wrapper">
-                <h3 class="main--title">Finance data</h3>
-                <div class="table-container">
-                </div>
-            </div>
+            <script>
+                // JavaScript to toggle the display of FAQ answers
+                document.querySelectorAll('.faq-item h3').forEach(item => {
+                    item.addEventListener('click', () => {
+                        const answer = item.nextElementSibling;
+                        answer.style.display = answer.style.display === 'none' || answer.style.display === '' ? 'block' : 'none';
+                    });
+                });
+            </script>
+
         </div>
     </body>
 </html>

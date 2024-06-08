@@ -5,13 +5,6 @@
         header("Location: login.php");
     }
 
-    // if (isset($_GET["user_id"])){
-    //     $user_id = $_GET["user_id"];
-    //     include ("database.php");
-    //     $sql = "SELECT user_id FROM user_test WHERE user_id = $user_id";
-    //     // $result = mysqli_query($db, $sql);
-    //     // $row = mysqli_fetch_array($result);
-    // }
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +19,24 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         />
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const form = document.querySelector('form');
+                const checkboxes = document.querySelectorAll('input[name="check[]"]');
+                form.addEventListener('submit', function(event) {
+                    let checked = false;
+                    checkboxes.forEach((checkbox) => {
+                        if (checkbox.checked) {
+                            checked = true;
+                        }
+                    });
+                    if (!checked) {
+                        alert('Please choose at least one testing option.');
+                        event.preventDefault(); // Prevent form submission
+                    }
+                });
+            });
+        </script>
     </head>
     <body>
         <div class="sidebar">
@@ -112,6 +123,14 @@
                         <!-- <a href="options_1.php" class="btn btn-primary">Back</a> -->
                     </header>
 
+                    <!-- <?php
+                    session_start();
+                    if (isset($_SESSION['error_message'])) {
+                        echo '<div class="alert alert-danger">' . $_SESSION['error_message'] . '</div>';
+                        unset($_SESSION['error_message']);
+                    }
+                    ?> -->
+
                     <form action="device_process.php" method="POST">
                         
                         <div class="form--group my-4">
@@ -135,8 +154,11 @@
                         <header class="d-flex justify-content-between my-4">
                         <h3><span>Please choose one or more testings to be done or go to the dashboard to view past tests</span></h3>
                                 <!-- <a href="options_1.php" class="btn btn-primary">Back</a> -->
-                        </header>               
-                            <div class="card--wrapper">
+                        </header> 
+ 
+                        <div class="row">             
+                            <!-- <div class="card--wrapper col"> -->
+                                <div class="form--group my-4">
                                 <div class="payment--card light-red">
                                     <div class="card--header">
                                         <div class="amount">
@@ -153,7 +175,11 @@
                                         </label>  
                                     </div>
                             </div>
+                            </div>
+                            <!-- </div> -->
 
+                            <!-- <div class="card--wrapper col"> -->
+                            <div class="form--group my-4">
                             <div class="payment--card light-purple">
                                 <div class="card--header">
                                     <div class="amount">
@@ -170,7 +196,11 @@
                                     </label> 
                                 </div>      
                             </div>
+                            </div>
+                            <!-- </div> -->
 
+                            <div class="form--group my-4">
+                            <!-- <div class="card--wrapper col"> -->
                             <div class="payment--card light-green">
                                 <div class="card--header">
                                     <div class="amount">
@@ -187,13 +217,17 @@
                                     </label> 
                                 </div>      
                             </div>
+                            </div>
+                            <!-- </div> -->
 
                             <div class="form--group">
                                 <input type="submit" class="btn btn-success" value="Submit Choice" name="start_choice">
                             </div>
                             <!-- <a href="test_chosen.php" class="btn btn-warning">Run Test</a> -->
                         </form>
-                </div>
+                        </div>
+                        
+                
             </div>
         </div>
     </body>
