@@ -10,13 +10,43 @@
             background: #f9f9f9;
             padding: 50px;
         }
+
+        @media print {
+            /* Hide elements that don't want to print */
+            .user--info {
+                display: none;
+            }
+
+            /* Ensure the main content takes full width */
+            .container {
+                width: 100%;
+            }
+
+            .user--details {
+              break-inside: avoid;
+              transform: scale(0.75);
+              margin-left: -90px;
+              margin-top: -50px !important; 
+            }
+        }
     </style>
 </head>
 <body>
+    <script> 
+        function downloadPDF() { 
+            window.print();
+        } 
+    </script>
+
     <div class="container">
         <header class="d-flex justify-content-between my-4">
-            <h1>More Details</h1>
-            <a href="past_test_admin.php" class="btn btn-primary">Back</a>
+            <div class="header--title">
+                <h1>More Details</h1>
+            </div>
+            <div class="user--info">
+                <input class="btn btn-info" type="button" value="Download PDF" onclick="downloadPDF()">
+                <a href="past_test_admin.php" class="btn btn-primary">Back</a>
+            </div>
         </header>
 
         <!-- Show the user_test table -->

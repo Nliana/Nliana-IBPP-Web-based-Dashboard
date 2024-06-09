@@ -191,31 +191,6 @@
         $stmt->close();
     }
 
-    // // Initialize array for table of packet_info data
-    // $packet_info = [];
-
-    // // Fetch the latest test_id
-    // $sql_latest_test = "SELECT test_id FROM tests ORDER BY test_date DESC LIMIT 1";
-    // $result = mysqli_query($db, $sql_latest_test);
-
-    // if ($result && mysqli_num_rows($result) > 0) {
-    //     $row = mysqli_fetch_assoc($result);
-    //     $latest_test_id = $row['test_id'];
-
-    //     // Prepare and execute the query to fetch data for the latest test_id
-    //     $query = "SELECT * FROM packet_info WHERE test_id = ?";
-    //     $stmt = $db->prepare($query);
-    //     $stmt->bind_param("i", $latest_test_id);
-    //     $stmt->execute();
-    //     $result = $stmt->get_result();
-
-    //     while ($row = $result->fetch_assoc()) {
-    //         $frame_protocols[] = $row['frame_protocols'];
-    //     }
-
-    //     $stmt->close();
-    // }
-
 ?>
 
 <!DOCTYPE html>
@@ -230,6 +205,31 @@
         <!-- Font Awesome Cdn Link-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+        <!-- PDF Download -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js "></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+        <style>
+        @media print {
+            /* Hide elements that you don't want to print */
+            .sidebar, .header--wrapper .user--info{
+                display: none;
+            }
+
+            /* Optionally, ensure the main content takes full width */
+            .main--content {
+                width: 100%;
+            }
+
+            .tabular--wrapper {
+              transform: scale(0.7);
+              margin-left: -125px;  
+              margin-top: 250px;
+            }
+        }
+        </style>
     </head>
 
     <body>
@@ -302,8 +302,8 @@
                     <div class="admin--content">
                         <h6><span>Admin, <?php echo $_SESSION["admin_name"]?></span></h6> 
                     </div>
-                    <input type="button" value="Download PDF" onclick="printDiv()"> <!--Button to download page as pdf-->
-                    <!-- <button id="btn">Download Report</button> -->
+                    <input class="btn btn-primary" type="button" value="Download PDF" onclick="downloadPDF()"> 
+                    
                     <a href="logout.php" class="btn btn-warning">Logout</a>
                 </div>
             </div>
@@ -461,7 +461,7 @@
                         </div>
 
                         <div class="card--wrapper col">
-                            <h5 class="text-center">Ports and CPE Distribution for the Latest Test</h5>
+                            <h5 class="text-center">Open Ports and Customer Premises Equipment (CPE) Distribution for the Latest Test</h5>
                             <!-- Line Chart -->
                             <div style="width: 550px;"><canvas id="myChart_3"></canvas></div>
                             <!-- <canvas id="myChart"></canvas> -->
@@ -723,19 +723,8 @@
         </div>
 
         <script> 
-            function printDiv() { 
-                var divContents = document.getElementById("mainReport").innerHTML; 
-                var originalContents = document.body.innerHTML;
-                //var originalContents = document.body.innerHTML; // Save original body content
-
-                // Replace body content with divContents
-                document.body.innerHTML = '<html><head><title>Print</title></head><body>' + divContents + '</body></html>';
-
-                // Print the page
+            function downloadPDF() { 
                 window.print();
-
-                // Restore original body content
-                document.body.innerHTML = originalContents;
             } 
         </script>
 

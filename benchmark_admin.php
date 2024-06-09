@@ -53,8 +53,37 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
         <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
         
+        <style>
+        @media print {
+            /* Hide elements that you don't want to print */
+            .sidebar, .header--wrapper .user--info{
+                display: none;
+            }
+
+            /* Optionally, ensure the main content takes full width */
+            .main--content {
+                width: 100%;
+            }
+
+            .tabular--wrapper {
+                break-inside: avoid;
+            }
+
+            .table-container {
+                transform: scale(0.5);
+                margin-left: -150px; 
+                margin-top: -100px; 
+            }
+        }
+        </style>
     </head>
     <body>
+        <script> 
+            function downloadPDF() { 
+                window.print();
+            } 
+        </script>
+
         <div class="sidebar">
             <div class="logo"></div>
             <ul class="menu">
@@ -123,14 +152,15 @@
                     <div class="admin--content">
                         <h6><span>Admin, <?php echo $_SESSION["admin_name"]?></span></h6> 
                     </div>
+                    <input class="btn btn-primary" type="button" value="Download PDF" onclick="downloadPDF()"> 
                     <a href="logout.php" class="btn btn-warning">Logout</a>
                 </div>
             </div>
         
         
-            <div class="card--container container">
+            <div class="tabular--wrapper">
                 <h3 class="main--title">The Bandwidth</h3>
-                <div class="card--wrapper">
+                <div class="table-container">
                 <canvas id="iperfChart_1" style="width: 550px;"></canvas>
 
                     <script>
