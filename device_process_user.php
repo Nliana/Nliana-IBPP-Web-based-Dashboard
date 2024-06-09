@@ -3,11 +3,12 @@ include "database.php";
 
 session_start();
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["create_device"])){
 
     //require_once "database.php";
-    if (isset($_POST["admin_name"])){
-        $admin_name = mysqli_real_escape_string($db,$_POST["admin_name"]);
+    if (isset($_POST["user_name"])){
+        $user_name = mysqli_real_escape_string($db,$_POST["user_name"]);
 
         $device_type = mysqli_real_escape_string($db, $_POST["device_type"]); //to prevent sql injection
         $device_name = mysqli_real_escape_string($db,$_POST["device_name"]);
@@ -18,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["create_device"])){
             array_push($errors, "All fields are required");
         }
 
-        $id_sql = "SELECT user_id FROM user_test WHERE full_name = '$admin_name'"; //no registration of same device name
+        $id_sql = "SELECT user_id FROM user_test WHERE full_name = '$user_name'"; //no registration of same device name
         $result_id = mysqli_query($db, $id_sql);
 
         $rowCountID = mysqli_num_rows($result_id); //check if the id already exists in the database
@@ -45,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["create_device"])){
                     mysqli_stmt_execute($stmt);
                     //session_start();
                     $_SESSION["create"] = "Device Created Successfully";
-                    header("Location: options_admin.php"); //add for user
+                    header("Location: options.php"); //add for user
                 } else {
                     die("Sorry, Something went wrong. Please try again later or contact the admin");
                 }
@@ -57,6 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["create_device"])){
         
         }
     }
-     
 }
+
 ?>

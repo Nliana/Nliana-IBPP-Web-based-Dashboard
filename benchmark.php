@@ -50,8 +50,37 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
         <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
         
+        <style>
+        @media print {
+            /* Hide elements that you don't want to print */
+            .sidebar, .header--wrapper .user--info{
+                display: none;
+            }
+
+            /* Optionally, ensure the main content takes full width */
+            .main--content {
+                width: 100%;
+            }
+
+            .tabular--wrapper {
+                break-inside: avoid;
+            }
+
+            .table-container {
+                transform: scale(0.5);
+                margin-left: -150px; 
+                margin-top: -100px; 
+            }
+        }
+        </style>
     </head>
     <body>
+        <script> 
+            function downloadPDF() { 
+                window.print();
+            } 
+        </script>
+
         <div class="sidebar">
             <div class="logo"></div>
             <ul class="menu">
@@ -105,7 +134,7 @@
             </ul>
         </div>
 
-        <div class="main--content">
+            <div class="main--content">
             <div class="header--wrapper">
                 <div class="header--title">
                     <h2>Benchmark Network Throughput</h2>
@@ -114,16 +143,16 @@
                     <div class="admin--content">
                         <h6><span>User, <?php echo $_SESSION["user_name"]?></span></h6> 
                     </div>
-                    <input type="button" value="Download PDF" onclick="printDiv()"> <!--Button to download page as pdf-->
+                    <input class="btn btn-primary" type="button" value="Download PDF" onclick="downloadPDF()"> 
                     <a href="logout.php" class="btn btn-warning">Logout</a>
                 </div>
             </div>
         
         
-            <div class="card--container">
+            <div class="tabular--wrapper">
                 <h3 class="main--title">The Bandwidth</h3>
-                <div class="card--wrapper">
-                <canvas id="iperfChart_1" style="width: 100%; height: 65vh; background: #222; border: 1px solid #555652; margin-top: 10px;"></canvas>
+                <div class="table-container">
+                <canvas id="iperfChart_1" style="width: 550px;"></canvas>
 
                     <script>
 
@@ -151,7 +180,7 @@
                                 options: {
                                     scales: {scales:{yAxes: [{beginAtZero: true}], xAxes: [{autoskip: true, maxTicketsLimit: 20}]}},
                                     tooltips:{mode: 'index'},
-                                    legend:{display: true, position: 'top', labels: {fontColor: 'rgb(255,255,255)', fontSize: 16}}
+                                    legend:{display: true, position: 'top', labels: {fontColor: 'rgb(0,0,0)', fontSize: 16}}
                                 }
                             });
                     </script>
@@ -161,7 +190,7 @@
             <div class="tabular--wrapper">
                 <h3 class="main--title">The packet loss</h3>
                 <div class="table-container">
-                        <canvas id="chart" style="width: 100%; height: 65vh; background: #222; border: 1px solid #555652; margin-top: 10px;"></canvas>
+                        <canvas id="chart" style="width: 550px;"></canvas>
 
                             <script>
                                 var ctx2 = document.getElementById("chart").getContext('2d');
@@ -173,7 +202,7 @@
                                     [{
                                         label: 'Packet Loss (Bytes)',
                                         data: [<?php echo $data2; ?>],
-                                        backgroundColor: 'transparent',
+                                        backgroundColor: 'rgba(0, 0, 255, 0.2)',
                                         borderColor:'rgba(255,99,132,1)',
                                         borderWidth: 3
                                     }
@@ -184,7 +213,7 @@
                                 options: {
                                     scales: {scales:{yAxes: [{beginAtZero: true}], xAxes: [{autoskip: true, maxTicketsLimit: 20}]}},
                                     tooltips:{mode: 'index'},
-                                    legend:{display: true, position: 'top', labels: {fontColor: 'rgb(255,255,255)', fontSize: 16}}
+                                    legend:{display: true, position: 'top', labels: {fontColor: 'rgb(0,0,0)', fontSize: 16}}
                                 }
                             });
                             </script>
@@ -193,7 +222,7 @@
                 <div class="tabular--wrapper">
                 <h3 class="main--title">The packet send</h3>
                 <div class="table-container">
-                        <canvas id="chart_2" style="width: 100%; height: 65vh; background: #222; border: 1px solid #555652; margin-top: 10px;"></canvas>
+                        <canvas id="chart_2" style="width: 550px;"></canvas>
 
                             <script>
                                 var ctx3 = document.getElementById("chart_2").getContext('2d');
@@ -205,7 +234,7 @@
                                     [{
                                         label: 'Packet Send (Bytes)',
                                         data: [<?php echo $data3; ?>],
-                                        backgroundColor: 'transparent',
+                                        backgroundColor: 'rgba(0, 0, 255, 0.2)',
                                         borderColor:'rgba(255,99,132,1)',
                                         borderWidth: 3
                                     }]
@@ -214,7 +243,7 @@
                                 options: {
                                     scales: {scales:{yAxes: [{beginAtZero: true}], xAxes: [{autoskip: true, maxTicketsLimit: 20}]}},
                                     tooltips:{mode: 'index'},
-                                    legend:{display: true, position: 'top', labels: {fontColor: 'rgb(255,255,255)', fontSize: 16}}
+                                    legend:{display: true, position: 'top', labels: {fontColor: 'rgb(0,0,0)', fontSize: 16}}
                                 }
                             });
                             </script>
@@ -223,7 +252,7 @@
                 <div class="tabular--wrapper">
                 <h3 class="main--title">The packet received</h3>
                 <div class="table-container">
-                        <canvas id="chart_3" style="width: 100%; height: 65vh; background: #222; border: 1px solid #555652; margin-top: 10px;"></canvas>
+                        <canvas id="chart_3" style="width: 550px;"></canvas>
 
                             <script>
                                 var ctx4 = document.getElementById("chart_3").getContext('2d');
@@ -235,7 +264,7 @@
                                     [{
                                         label: 'Packet Received (bytes)',
                                         data: [<?php echo $data4; ?>],
-                                        backgroundColor: 'transparent',
+                                        backgroundColor: 'rgba(0, 0, 255, 0.2)',
                                         borderColor:'rgba(255,99,132,1)',
                                         borderWidth: 3
                                     }]
@@ -244,7 +273,7 @@
                                 options: {
                                     scales: {scales:{yAxes: [{beginAtZero: true}], xAxes: [{autoskip: true, maxTicketsLimit: 20}]}},
                                     tooltips:{mode: 'index'},
-                                    legend:{display: true, position: 'top', labels: {fontColor: 'rgb(255,255,255)', fontSize: 16}}
+                                    legend:{display: true, position: 'top', labels: {fontColor: 'rgb(0,0,0)', fontSize: 16}}
                                 }
                             });
                             </script>

@@ -1,7 +1,15 @@
 <?php
     session_start();
-    if (isset($_SESSION["users"])){
+    // if (isset($_SESSION["users"])){
+    //     header("Location: options.php");
+    // }
+
+    // Check if user is already logged in
+    if (isset($_SESSION["user_name"])) {
         header("Location: options.php");
+
+    } elseif (isset($_SESSION["admin_name"])) {
+        header("Location: options_admin.php");
     }
 ?>
 
