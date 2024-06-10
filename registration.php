@@ -19,6 +19,42 @@
     <title>Registration Form</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #EBF8FF; /* Change this color for background color */
+            margin: 0;
+        }
+        
+        .registration--container {
+            background-color: #fff;
+        }
+
+        .registration--container h3 {
+            margin-bottom: 20px;
+        }
+
+        .registration--container img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto 20px;
+            border-radius: 10px;
+            align-items: center;
+        }
+
+        .form--group {
+            margin-bottom: 15px;
+        }
+
+        .form--btn {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <div class="registration--container">
