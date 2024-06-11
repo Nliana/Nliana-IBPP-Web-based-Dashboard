@@ -3,6 +3,8 @@
     if (!isset($_SESSION["user_name"])){
         header("Location: login.php");
     }
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -130,8 +132,8 @@
                             <div class="payment--card light-red">
                                 <div class="card--header">
                                     <div class="amount">
-                                        <span class="title">Benchmark Network Throughput</span>
-                                        <span class="amount--value"><i class="fas fa-signal"></i></span>
+                                        <span class="title">Monitor Network Traffic</span>
+                                        <span class="amount--value"><i class="fas fa-eye"></i></span>
                                     </div>
                                     <label for="executeCommand1" class="check--container">
                                         <input type="checkbox" id="executeCommand1" name="executeCommand1" value="yes">
@@ -145,8 +147,8 @@
                             <div class="payment--card light-purple">
                                 <div class="card--header">
                                     <div class="amount">
-                                        <span class="title">Penetration Testing</span>
-                                        <span class="amount--value"><i class="fas fa-flask-vial"></i></span>
+                                        <span class="title">Benchmark Network Throughput</span>
+                                        <span class="amount--value"><i class="fas fa-signal"></i></span>
                                     </div>
                                     <label for="executeCommand2" class="check--container">
                                         <input type="checkbox" id="executeCommand2" name="executeCommand2" value="yes">
@@ -160,8 +162,8 @@
                             <div class="payment--card light-green">
                                 <div class="card--header">
                                     <div class="amount">
-                                        <span class="title">Monitor Network Traffic</span>
-                                        <span class="amount--value"><i class="fas fa-eye"></i></span>
+                                        <span class="title">Penetration Testing</span>
+                                        <span class="amount--value"><i class="fas fa-flask-vial"></i></span>
                                     </div>
                                     <label for="executeCommand3" class="check--container">
                                         <input type="checkbox" id="executeCommand3" name="executeCommand3" value="yes">
