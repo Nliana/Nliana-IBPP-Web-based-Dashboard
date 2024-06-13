@@ -18,7 +18,8 @@ body {
     top: 0;
     left: 0;
     bottom: 0;
-    width: 110px;
+    /* width: 110px; */
+    float: left;
     height: 100vh;
     padding: 0 1.7rem;
     color: #fff;
@@ -27,9 +28,12 @@ body {
     overflow-x: hidden; /* Prevents horizontal overflow */
     overflow-y: auto;
     background: #4691B0;
+    padding-left: 20px;   
+    width: calc(10% - 20px);
 }
 .sidebar:hover{
-    width: 270px;
+    /* width: 270px; */
+    width: calc(25% - 20px);
     transition: 0.5s;
 }
 /* Logo design */
@@ -87,6 +91,7 @@ body {
     background: #ebe9e9;
     width: 100%;
     padding: 1rem;
+    display: inline-block;
 }
 
 .header--wrapper img{

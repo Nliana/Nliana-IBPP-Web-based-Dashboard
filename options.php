@@ -105,6 +105,41 @@
                     <h3><span>Add IoT Device</span></h3>
                 </header>
 
+                <?php
+                if (isset($_SESSION["create"])){
+                    ?>
+                    <div class="alert alert-success">
+                    <?php
+                    echo $_SESSION["create"];
+                    unset($_SESSION["create"]);
+                    ?>
+                    </div>
+                    <?php
+                }
+                ?>
+
+                <?php
+                $errors = [];
+                if (isset($_SESSION["errors"])){
+                    ?>
+                    <div class="alert alert-danger">
+                    <?php
+                    if (is_array($_SESSION["errors"])) {
+                        // Loop through each error in the array and display it
+                        foreach ($_SESSION["errors"] as $error) {
+                            echo "<p>$error</p>";
+                        }
+                    } else {
+                        // If it's not an array, display it directly
+                        echo $_SESSION["errors"];
+                    }
+                    unset($_SESSION["errors"]);
+                    ?>
+                    </div>
+                    <?php
+                }
+                ?>
+
                 <form action="device_process_user.php" method="POST">
                     <div class="form--group my-4">
                         <label>Enter Device Type</label>

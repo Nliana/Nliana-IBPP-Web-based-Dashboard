@@ -8,13 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["start_choice"])) {
     // Initialize an array to hold the commands to be executed
     $commands = [];
 
-    // Check if at least one checkbox is selected
-    if (!isset($_POST['check']) || count($_POST['check']) === 0) {
-        $_SESSION['error_message'] = 'Please choose at least one testing option.';
-        header("Location: options.php");
-        exit();
-    }
-
     // Check which commands need to be executed based on the checkbox selections
     if (isset($_POST['executeCommand1']) && $_POST['executeCommand1'] === 'yes') {
         $commands[] = "sudo salt 'raspi_2' cmd.run '/home/liana02/tshark_monitor.sh'";
@@ -26,6 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["start_choice"])) {
         $commands[] = "sudo /home/liana03/nmap_to_mariadb.sh avleonov.com"; // Replace with the path to your local script
     }
 
+
+    // Check if at least one command is selected
+    if (empty($commands)) {
+        $_SESSION['error_message'] = 'Please choose at least one testing option.';
+        header("Location: options_admin.php");
+        exit();
+    }
+    
     // Fetch the latest device_id
     $query = "SELECT device_id FROM devices ORDER BY device_id DESC LIMIT 1";
     $result = mysqli_query($db, $query);

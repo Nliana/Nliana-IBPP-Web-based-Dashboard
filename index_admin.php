@@ -526,9 +526,8 @@
 
                         <div class="card--wrapper col">
                             <h5 class="text-center">Ethernet Source Resolved Distribution for the Latest Test</h5>
-                            <!-- Line Chart -->
+                            <!-- Pie Chart -->
                             <div style="width: 550px;"><canvas id="myChart_4"></canvas></div>
-                            <!-- <canvas id="myChart"></canvas> -->
                             <script>
                                 // Prepare data for the chart
                                 var ethSrcResolved = <?php echo json_encode($eth_src_resolved); ?>;
@@ -539,21 +538,35 @@
                                     ethSrcCounts[src] = (ethSrcCounts[src] || 0) + 1;
                                 });
 
-                                // Prepare data for the bar chart
+                                // Prepare data for the pie chart
                                 var labels = Object.keys(ethSrcCounts);
                                 var data = Object.values(ethSrcCounts);
 
-                                // Create the bar chart
+                                // Create the pie chart
                                 var ctx_4 = document.getElementById('myChart_4').getContext('2d');
                                 var myChart_4 = new Chart(ctx_4, {
-                                    type: 'bar',
+                                    type: 'pie',
                                     data: {
                                         labels: labels,
                                         datasets: [{
                                             label: 'Ethernet Source Resolved Count',
                                             data: data,
-                                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                            borderColor: 'rgba(54, 162, 235, 1)',
+                                            backgroundColor: [
+                                                'rgba(255, 99, 132, 0.2)',
+                                                'rgba(54, 162, 235, 0.2)',
+                                                'rgba(255, 206, 86, 0.2)',
+                                                'rgba(75, 192, 192, 0.2)',
+                                                'rgba(153, 102, 255, 0.2)',
+                                                'rgba(255, 159, 64, 0.2)'
+                                            ],
+                                            borderColor: [
+                                                'rgba(255, 99, 132, 1)',
+                                                'rgba(54, 162, 235, 1)',
+                                                'rgba(255, 206, 86, 1)',
+                                                'rgba(75, 192, 192, 1)',
+                                                'rgba(153, 102, 255, 1)',
+                                                'rgba(255, 159, 64, 1)'
+                                            ],
                                             borderWidth: 1
                                         }]
                                     },
@@ -568,16 +581,12 @@
                                                 display: true,
                                                 text: 'Ethernet Source Resolved Distribution for the Latest Test'
                                             }
-                                        },
-                                        scales: {
-                                            y: {
-                                                beginAtZero: true
-                                            }
                                         }
                                     }
                                 });
                             </script>
                         </div>
+
 
                         <div class="card--wrapper d-flex justify-content-center align-items-center mx-auto">
                             <h5 class="text-center">Frame Protocols Distribution for the Latest Test</h5>
